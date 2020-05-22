@@ -1,0 +1,62 @@
+pipeline {
+    agent {
+        node {
+            label "${NODE_LABEL}"
+            customWorkspace "${NODE_WORKSPACE_DOCKERD}"
+        }
+    }
+
+    stages {
+        stage("Initialization") {
+            steps {
+                // use name of the patchset as the build name
+                buildName "${GIT_COMMIT}"
+                buildDescription "Executed @ ${NODE_NAME}"
+            }
+        }
+        stage('Checkout') {
+            steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: 'master']],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'OutSystemsMobile'], [$class: 'CleanBeforeCheckout']],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [[credentialsId: 'SilviaBitbucket', url: 'https://procde.prosegur.com/bitbucket/scm/vig/qa-outsystems-mobile.git']]
+                ])
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: 'master']],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'OutSystemsWeb'], [$class: 'CleanBeforeCheckout']],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [[credentialsId: 'SilviaBitbucket', url: 'https://procde.prosegur.com/bitbucket/scm/vig/qa-outsystems-web.git']]
+                ])
+            }
+        }
+        stage('Test') {
+            steps {
+                sh "echo JOB_NAME=${env.BUILD_TAG} > .env"
+                sh '''
+                    HOST_UID_GID=$(id -u):$(id -g)
+                    echo HOST_UID_GID=$HOST_UID_GID >> .env
+                    echo node_workspace_windows=$NODE_WORKSPACE_WINDOWS >> .env
+                    echo browser=$BROWSER >> .env
+                    echo country=$COUNTRY >> .env
+                    echo environment=$ENVIRONMENT >> .env
+                    echo remote_url=$REMOTE_URL >> .env
+                    echo test_cases=$TEST_CASES >> .env
+                    echo test_suite=$TEST_SUITE >> .env
+                '''
+
+                sh './Jenkins/JenkinsRemote/run_test.sh'
+            }
+        }
+    }
+    post {
+        always {
+            robot otherFiles: '*.png', outputPath: './results', passThreshold: 90.0, unstableThreshold: 75.0
+            cleanWs()
+        }
+    }
+}

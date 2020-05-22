@@ -1,0 +1,22 @@
+version: "3"
+services:
+  la_red :
+    build:
+      context: ../..
+      dockerfile: Jenkins/JenkinsLocal/dockerfile
+    environment:
+      browser: ${browser}
+      country: ${country}
+      environment: ${environment}
+      remote_url: ${remote_url}
+      test_cases: ${test_cases}
+      test_suite: ${test_suite}
+    user: ${HOST_UID_GID}
+    volumes:
+      - ${node_workspace_windows}/results:/tmp/results
+    networks:
+      - default
+networks:
+  default:
+    external:
+      name: jenkins_net

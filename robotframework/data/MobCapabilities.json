@@ -1,0 +1,13 @@
+{
+    "Android": {
+        "automationName": "uiautomator2",
+        "platformVersion": "8.1",
+        "platformName": "Android"
+    },
+    "iOS": {
+        "app": "TODO",
+        "automationName": "XCUITest",
+        "platformVersion": "13.0",
+        "platformName": "iOS"
+    }
+}

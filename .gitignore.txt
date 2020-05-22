@@ -1,0 +1,12 @@
+#Ignore files
+*.pyc
+*.log
+*.class
+*.png
+
+#Ignore directory
+target/
+.idea/
+.vscode/
+results/
+libraries/*.class
