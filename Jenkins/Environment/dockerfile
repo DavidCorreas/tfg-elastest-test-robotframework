@@ -32,11 +32,11 @@ RUN unzip $CHROMEDRIVER_DIR/chromedriver* -d $CHROMEDRIVER_DIR
 
 ENV browser=chrome
 ENV country=es
-ENV environment=PRE_QA
+ENV environment=QA
 ENV is_remote=True
 ENV remote_url=http://selenoid:4444/wd/hub
 ENV test_cases=""
-ENV test_suite=PRUEBA-JENKINS.robot
+ENV test_suite=M_login.robot
 
 # Put Chromedriver into the PATH
 ENV PATH $CHROMEDRIVER_DIR:$PATH

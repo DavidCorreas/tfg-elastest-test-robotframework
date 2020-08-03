@@ -1,0 +1,23 @@
+version: "3"
+services:
+  test:
+    build:
+      context: ../..
+      dockerfile: Jenkins/JenkinsProsegur/dockerfile
+    environment:
+      browser: ${browser}
+      version: ${version}
+      country: ${country}
+      environment: ${environment}
+      remote_url: ${remote_url}
+      test_cases: ${test_cases}
+      test_suite: ${test_suite}
+    user: ${HOST_UID_GID}
+    volumes:
+      - ${RESULTS_URL}:/tmp/workspace
+    networks:
+      - default
+networks:
+  default:
+    external:
+      name: jenkins_net

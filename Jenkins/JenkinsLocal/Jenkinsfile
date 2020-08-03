@@ -15,18 +15,10 @@ pipeline {
         stage('Copy Project') {
             steps{
                 dir("${PROJECT_PATH}"){
-                    fileOperations([fileCopyOperation(excludes: "**/*.pyc,**/*.log,**/*.class,**/*.png,**/target/**,**/.idea/**,**/.vscode/**,**/results/**,**/*.xlsx,**/*.md", flattenFiles: false, includes: 'LaRed/**', targetLocation: '${NODE_WORKSPACE_DOCKERD}')])
+                    fileOperations([fileCopyOperation(excludes: "**/*.pyc,**/*.log,**/*.class,**/*.png,**/target/**,**/.idea/**,**/.vscode/**,**/results/**,**/*.xlsx,**/*.md", flattenFiles: false, includes: 'POPS/**', targetLocation: '${NODE_WORKSPACE_DOCKERD}')])
                 }
-                sh 'mv LaRed/* .'
-                sh 'rmdir LaRed'
-            }
-        }
-        stage('Copy Libraries') {
-            steps {
-                dir("${PROJECT_PATH}"){
-                    fileOperations([fileCopyOperation(excludes: "**/*.pyc,**/.idea/**", flattenFiles: false, includes: 'OutSystemsWeb/**', targetLocation: '${NODE_WORKSPACE_DOCKERD}')])
-                    fileOperations([fileCopyOperation(excludes: "**/*.pyc,**/.idea/**", flattenFiles: false, includes: 'OutSystemsMobile/**', targetLocation: '${NODE_WORKSPACE_DOCKERD}')])
-                }
+                sh 'mv POPS/* .'
+                sh 'rmdir POPS'
             }
         }
         stage('Test') {

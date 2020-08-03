@@ -1,6 +1,6 @@
 version: "3"
 services:
-  la_red :
+  test :
     build:
       context: ../..
       dockerfile: Jenkins/JenkinsLocal/dockerfile

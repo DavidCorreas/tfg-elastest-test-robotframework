@@ -1,0 +1,5 @@
+FROM selenoid/vnc:chrome_80.0
+
+ENV http_proxy "<url proxy>"
+ENV https_proxy "<url proxy>"
+

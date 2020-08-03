@@ -1,0 +1,29 @@
+// Related to https://issues.jenkins-ci.org/browse/JENKINS-26481
+
+
+def tests = params.Tests.split(',')
+def build_ok = true
+
+for (int i = 0; i < tests.length; i++) {
+    try {
+        def test = "${tests[i]}".trim()
+        stage(test) {
+            build job: test, parameters: [
+                string(name: 'BROWSER', value: String.valueOf(BROWSER)),
+                string(name: 'VERSION', value: String.valueOf(VERSION)),
+                string(name: 'COUNTRY', value: String.valueOf(COUNTRY)),
+                string(name: 'ENVIRONMENT', value: String.valueOf(ENVIRONMENT)),
+                string(name: 'NODE_LABEL', value: String.valueOf(NODE_LABEL))
+                ]
+        }
+    } catch(e) {
+        build_ok = false
+        echo e.toString()
+    }
+}
+
+if (build_ok) {
+    currentBuild.result = "SUCCESS"
+} else {
+    currentBuild.result = "FAILURE"
+}

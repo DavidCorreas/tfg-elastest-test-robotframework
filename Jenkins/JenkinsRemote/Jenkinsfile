@@ -22,7 +22,7 @@ pipeline {
                     doGenerateSubmoduleConfigurations: false,
                     extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'OutSystemsMobile'], [$class: 'CleanBeforeCheckout']],
                     submoduleCfg: [],
-                    userRemoteConfigs: [[credentialsId: 'SilviaBitbucket', url: 'https://procde.prosegur.com/bitbucket/scm/vig/qa-outsystems-mobile.git']]
+                    userRemoteConfigs: [[credentialsId: 'cr_bitbucket', url: 'https://procde.prosegur.com/bitbucket/scm/vig/qa-outsystems-mobile.git']]
                 ])
                 checkout([
                     $class: 'GitSCM',
@@ -30,7 +30,7 @@ pipeline {
                     doGenerateSubmoduleConfigurations: false,
                     extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'OutSystemsWeb'], [$class: 'CleanBeforeCheckout']],
                     submoduleCfg: [],
-                    userRemoteConfigs: [[credentialsId: 'SilviaBitbucket', url: 'https://procde.prosegur.com/bitbucket/scm/vig/qa-outsystems-web.git']]
+                    userRemoteConfigs: [[credentialsId: 'cr_bitbucket', url: 'https://procde.prosegur.com/bitbucket/scm/vig/qa-outsystems-web.git']]
                 ])
             }
         }

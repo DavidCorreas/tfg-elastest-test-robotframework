@@ -1,0 +1,38 @@
+FROM python:3
+
+ENV http_proxy "<url proxy>"
+ENV https_proxy "<url proxy>"
+
+WORKDIR /usr/src/app
+
+COPY Jenkins/Environment/requirements.txt ./
+RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org --upgrade pip
+RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org --no-cache-dir -r requirements.txt
+
+# Config apt-get to download with proxy
+RUN echo Acquire::http::proxy "${CREDENTIALS_PROXY}"; > /etc/apt/apt.conf.d/80proxy
+RUN echo Acquire::ftp::proxy "${CREDENTIALS_PROXY}"; >> /etc/apt/apt.conf.d/80proxy
+RUN echo Acquire::https::proxy "${CREDENTIALS_PROXY}"; >> /etc/apt/apt.conf.d/80proxy
+
+# We need wget to set up the PPA and xvfb to have a virtual screen and unzip to install the Chromedriver
+RUN apt-get update
+RUN apt-get install -y wget xvfb unzip
+
+# Set up Chromedriver Environment variables
+ENV CHROMEDRIVER_VERSION 80.0.3987.16
+ENV CHROMEDRIVER_DIR /chromedriver
+RUN mkdir $CHROMEDRIVER_DIR
+
+# Download and install Chromedriver
+RUN wget -q --continue -P $CHROMEDRIVER_DIR "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+RUN unzip $CHROMEDRIVER_DIR/chromedriver* -d $CHROMEDRIVER_DIR
+
+# Put Chromedriver into the PATH
+ENV PATH $CHROMEDRIVER_DIR:$PATH
+
+
+COPY . .
+WORKDIR robotframework
+ENV PYTHONPATH "${PYTHONPATH}:/usr/src/app/"
+
+CMD robot -d "/tmp/workspace/results" ${test_cases} -v REMOTE_URL:${remote_url} -v COD_PAIS:${country} -v IS_REMOTE:True -v ENVIRONMENT:${environment} -v BROWSER:${browser} -v VERSION:${version} ${test_suite}
