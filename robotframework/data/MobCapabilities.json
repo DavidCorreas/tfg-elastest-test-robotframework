@@ -2,7 +2,8 @@
     "Android": {
         "automationName": "uiautomator2",
         "platformVersion": "8.1",
-        "platformName": "Android"
+        "platformName": "Android",
+        "app": "/opt/app-debug.2.0.apk"
     },
     "iOS": {
         "app": "TODO",

@@ -15,10 +15,10 @@ class MobApplication(PageObject):
 
     # ------------------------------- Config ------------------------------- #
     def __init__(self):
-        super().__init__('OutSystemsMobile')
+        super().__init__('AppiumLibrary')
 
     # ------------------------------- Keywords ------------------------------- #
-    @keyword(name='Abrir aplicacion movil')
+    @keyword(name='Abrir aplicacion movil en ${platform}')
     def open_application(self, platform):
         # Recuperar la url en base al entorno
         current_path = os.path.dirname(os.path.abspath(__file__))
@@ -30,7 +30,7 @@ class MobApplication(PageObject):
             platformName=capabilities[platform]["platformName"], app=capabilities[platform]["app"],
             noReset=True, disableWindowAnimation=True, nativeWebScreenshot=True,
             androidScreenshotPath='results/screenshots',
-            automationName=capabilities[platform]["automationName"], newCommandTimeout=60000)
+            automationName=capabilities[platform]["automationName"], newCommandTimeout=60000, appWaitDuration=30000, autoGrantPermissions=True)
 
         self.osl.switch_to_context(self.osl.get_contexts()[1])
 

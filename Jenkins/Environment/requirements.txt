@@ -8,3 +8,4 @@ six
 urllib3
 openpyxl
 robotframework-appiumlibrary
+robotframework-seleniumlibrary

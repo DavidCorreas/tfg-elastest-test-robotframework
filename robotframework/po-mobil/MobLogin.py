@@ -15,7 +15,7 @@ class MobLogin(PageObject):
 
     # ------------------------------- Locators ------------------------------- #
     def __init__(self):
-        PageObject.__init__(self, 'OutSystemsMobile')
+        super().__init__('AppiumLibrary')
 
         self._input_user = "//*[@resource-id='Input_UsernameVal']"
         self._input_password = "//*[@resource-id='Input_PasswordVal']"
