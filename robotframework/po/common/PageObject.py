@@ -10,9 +10,11 @@ from robot.libraries.BuiltIn import BuiltIn
 class PageObject:
 
     COD_PAIS = "es"
-    ENVIRONMENT = "PRE_QA"
+    ENVIRONMENT = "DEV"
     REMOTE_URL_MOB = "http://127.0.0.1:4723/wd/hub"
-    REMOTE_URL = "http://esdc1csdla112.emea.prosegur.local:4444/wd/hub"
+    # Endpoint elastest slenium grid
+    REMOTE_URL = "http://localhost:37000/eus/v1/"
+
     BROWSER = "gc"
     IS_REMOTE = False
     RESOLUTION = "FHD"

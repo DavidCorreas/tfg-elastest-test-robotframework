@@ -1,19 +1,7 @@
 {
     "Environments" : {
         "DEV" : {
-            "Url" : "https://devpops.prosegur.com/LaRed_BackOffice/Users.aspx"
-        },
-        "PRE_QA" : {
-            "Url" : "https://preqapops.prosegur.com/LaRed_BackOffice/Users.aspx"
-        },
-        "QA_BABEL" : {
-            "Url" : "https://qapops.prosegur.com/LaRed_BackOffice/Users.aspx"
-        },
-        "UAT" : {
-            "Url" : "https://prelared.prosegur.com/LaRed_BackOffice/"
-        },
-        "PRO" : {
-            "Url" : "NO URL"
+            "Url" : "https://google.com"
         }
     }
 }

@@ -18,7 +18,7 @@ class WebApplication(PageObject):
     # ------------------------------- Locators ------------------------------- #
     def __init__(self):
         # Library Load
-        super().__init__('OutSystemsWeb')
+        super().__init__('SeleniumLibrary')
 
     # ------------------------------- Keywords ------------------------------- #
     @keyword(name='Abrir aplicacion')
@@ -26,11 +26,13 @@ class WebApplication(PageObject):
         # Recuperar la url en base al entorno
         current_path = os.path.dirname(os.path.abspath(__file__))
 
+        # Obtener variables del json
         enviroment_path = current_path + "/../data/" + self._get_cod_pais() + '/Environment.json'
         with open(enviroment_path) as environment_file:
             environment_data = json.load(environment_file)
         url = environment_data["Environments"][self._get_environment()]["Url"]
 
+        # Configurar navegador si es remoto (para elastest)
         BuiltIn().log("ES REMOTO:")
         BuiltIn().log(self._get_is_remote())
 
@@ -43,18 +45,21 @@ class WebApplication(PageObject):
             if self._get_resolution() == 'HD':
                 resolution = "1280x720x24"
             # Capabilities
-            capabilities = {"enableVNC": True,
-                            "browserName": "chrome",
-                            "version": "77.0",
-                            "enableVideo": False,
-                            "enableLog": True,
-                            "screenResolution": resolution,
-                            "name": suite_name + "." + test_name}
+            capabilities = {
+                "live": True,
+                "enableLog": True,
+                "screenResolution": resolution,
+                "name": suite_name + "." + test_name,
+                "chromeOptions": {
+                    "args": ["live=true", "elastestTimeout=0"]
+                }
+            }
             self.osl.open_browser(url,
                                   self._get_browser(),
                                   remote_url=self._get_remote_url(),
                                   desired_capabilities=capabilities)
 
+        # Abrir navegador si no es remoto (IS_REMOTE=False)
         else:
             self.osl.open_browser(url, self._get_browser())
 
