@@ -1,7 +1,7 @@
 {
     "Environments" : {
         "DEV" : {
-            "Url" : "https://google.com"
+            "Url" : "https://localhost:4200"
         }
     }
 }

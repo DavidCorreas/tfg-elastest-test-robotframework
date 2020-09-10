@@ -1,6 +1,6 @@
 *** Settings ***
 # Poner siempre #
-Test Teardown    Run Keyword If Test Failed    OutSystemsMobile.Capture Page Screenshot movil
+Test Teardown    Run Keyword If Test Failed    MobApplication.Capturar Pantallazo movil
 Library    po/common/PythonPathScript.py
 # ------------- #
 
@@ -18,7 +18,8 @@ LOGIN-0001
 
     Comment    Login basico como administrador
     MobApplication.Capturar Pantallazo movil
-#    MobLogin.Logarse como Admin
+    MobLogin.Logarse como David
+    
 #    MobApplication.Capturar Pantallazo movil
 #    MobLogin.Deslogarse
 #    MobApplication.Capturar Pantallazo movil

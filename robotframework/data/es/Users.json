@@ -1,16 +1,8 @@
 {
     "Credenciales" : {
-        "Admin" : {
-            "User" : "Equipoqa",
-            "Password" : "Marmota20*",
-            "Name" : "Silvia Rodriguez",
-            "Email" : "silvia.rodriguez-fernandez@prosegur.com"
-        },
-        "Admin_2" : {
-            "User" : "German",
-            "Password" : "Marmota20*",
-            "Name" : "German Matilla",
-            "Email" : "german.matilla@innoqa.es"
+        "David" : {
+            "Password" : "1234",
+            "Email" : "david@tfg-elastest.com"
         }
     }
 }
