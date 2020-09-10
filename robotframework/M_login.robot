@@ -18,8 +18,9 @@ LOGIN-0001
 
     Comment    Login basico como administrador
     MobApplication.Capturar Pantallazo movil
+    MobLogin.Registrarse como David
     MobLogin.Logarse como David
-    
+
 #    MobApplication.Capturar Pantallazo movil
 #    MobLogin.Deslogarse
 #    MobApplication.Capturar Pantallazo movil
