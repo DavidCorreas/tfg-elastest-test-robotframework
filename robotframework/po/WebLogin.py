@@ -102,7 +102,7 @@ class WebLogin(PageObject):
     @keyword(name='Deslogarse')
     def logout(self):
         # Clicamos el logout
-        self.osl.wait_until_element_is_visible(btn_logout)
+        self.osl.wait_until_element_is_visible(btn_logout, 3)
         self.osl.click_element(btn_logout)
         self.osl.wait_until_element_is_visible(btn_top_login)
 
