@@ -56,12 +56,22 @@ class MobList(PageObject):
         self.osl.capture_page_screenshot()
         self.osl.wait_until_element_is_visible(loc_content)
 
+    @keyword(name='Comprobar eliminacion del post con titulo ${title}')
+    def check_delete(self, title):
+        BuiltIn().run_keyword_and_expect_error('*', 'Comprobar que existe post con titulo "{}", con imagen y contenido "_"'.format(title))
+        
     @keyword(name='Editar post ${title}')
     def edit_card(self, title):
         # Tiene que estar la carta abierta (usar keyword "Comprobar que existe post...")
         loc_edit = btn_card_edit.format(title)
         self.osl.wait_until_element_is_visible(loc_edit)
         self.osl.click_element(loc_edit)
+
+    @keyword(name='Eliminar post ${title}')
+    def delete_post(self, title):
+        loc_delete = btn_card_delete.format(title)
+        self.osl.wait_until_element_is_visible(loc_delete)
+        self.osl.click_element(loc_delete)
 
     @keyword(name='Poner paginado en ${num}')
     def items_per_page(self, num):

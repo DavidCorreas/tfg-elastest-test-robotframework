@@ -69,9 +69,11 @@ POSTS-0002
     MobLogin.Intentar Deslogarse
     MobLogin.Logarse como David
 
-    Comment  Editamos el post creado en la prueba POSTS-0001
+    Comment  Encontramos el post creado en la prueba POSTS-0001
     MobList.Poner paginado en 10
     MobList.Comprobar que existe post con titulo "${TITLE}", con imagen y contenido "${CONTENT}"
+
+    Comment  Editamos el post
     MobList.Editar post ${TITLE}
     MobPost.Introducir titulo ${TITLE}_edit
     MobPost.Introducir imagen Imagen-Mostoles.jpg
@@ -81,6 +83,29 @@ POSTS-0002
     Comment  Comrpobamos que se ha editado bien
     MobList.Poner paginado en 10
     MobList.Comprobar que existe post con titulo "${TITLE}_edit", con imagen y contenido "Edit: ${CONTENT}"
+
+    Comment  Logout y cerramos la aplicacion
+    MobApplication.Capturar Pantallazo movil
+    MobLogin.Deslogarse
+    MobApplication.Capturar Pantallazo movil
+    MobApplication.Cerrar Aplicacion movil
+
+POSTS-0003
+    [Documentation]  Eliminar post creado en prueba POSTS-0001 y editado en POSTS-0002
+    Comment  Abrir Aplicacion
+    MobApplication.Abrir aplicacion movil en Android
+
+    Comment  LogIn
+    MobLogin.Intentar Deslogarse
+    MobLogin.Logarse como David
+
+    Comment  Encontramos el post editado en la prueba POSTS-0002
+    MobList.Poner paginado en 10
+    MobList.Comprobar que existe post con titulo "${TITLE}_edit", con imagen y contenido "Edit: ${CONTENT}"
+
+    Comment  Eliminamos el post
+    MobList.Eliminar post ${TITLE}_edit
+    MobList.Comprobar eliminacion del post con titulo ${TITLE}_edit
 
     Comment  Logout y cerramos la aplicacion
     MobApplication.Capturar Pantallazo movil
