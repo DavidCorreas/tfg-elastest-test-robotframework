@@ -45,12 +45,14 @@ class MobPost(PageObject):
     def put_title(self, title):
         # Introducimos el titulo
         self.osl.wait_until_element_is_visible(cpm_post_title)
+        self.osl.clear_text(cpm_post_title)
         self.osl.input_text(cpm_post_title, title)
     
     @keyword(name='Introducir contenido "${content}"')
     def put_content(self, content):
         # Introducimos el titulo
         self.osl.wait_until_element_is_visible(cmp_post_content)
+        self.osl.clear_text(cmp_post_content)
         self.osl.input_text(cmp_post_content, content)
 
     @keyword(name='Introducir imagen ${image}')

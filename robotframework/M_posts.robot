@@ -33,6 +33,8 @@ POSTS-0001
     [Documentation]  Crear un post
     ${TITLE}  Common.Randomize  Titulo  4
     ${CONTENT}  Common.Randomize  Contenido de prueba
+    Set Suite Variable  ${TITLE}
+    Set Suite Variable  ${CONTENT}
 
     Comment  Abrir Aplicacion
     MobApplication.Abrir aplicacion movil en Android
@@ -51,6 +53,34 @@ POSTS-0001
     Comment  Comrpobar que se ha añadido bien
     MobList.Poner paginado en 10
     MobList.Comprobar que existe post con titulo "${TITLE}", con imagen y contenido "${CONTENT}"
+
+    Comment  Logout y cerramos la aplicacion
+    MobApplication.Capturar Pantallazo movil
+    MobLogin.Deslogarse
+    MobApplication.Capturar Pantallazo movil
+    MobApplication.Cerrar Aplicacion movil
+
+POSTS-0002
+    [Documentation]  Editar post creado en prueba POSTS-0001
+    Comment  Abrir Aplicacion
+    MobApplication.Abrir aplicacion movil en Android
+
+    Comment  LogIn
+    MobLogin.Intentar Deslogarse
+    MobLogin.Logarse como David
+
+    Comment  Editamos el post creado en la prueba POSTS-0001
+    MobList.Poner paginado en 10
+    MobList.Comprobar que existe post con titulo "${TITLE}", con imagen y contenido "${CONTENT}"
+    MobList.Editar post ${TITLE}
+    MobPost.Introducir titulo ${TITLE}_edit
+    MobPost.Introducir imagen Imagen-Mostoles.jpg
+    MobPost.Introducir contenido "Edit: ${CONTENT}"
+    MobPost.Guardar post
+
+    Comment  Comrpobamos que se ha editado bien
+    MobList.Poner paginado en 10
+    MobList.Comprobar que existe post con titulo "${TITLE}_edit", con imagen y contenido "Edit: ${CONTENT}"
 
     Comment  Logout y cerramos la aplicacion
     MobApplication.Capturar Pantallazo movil

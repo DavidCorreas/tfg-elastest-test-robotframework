@@ -56,6 +56,13 @@ class MobList(PageObject):
         self.osl.capture_page_screenshot()
         self.osl.wait_until_element_is_visible(loc_content)
 
+    @keyword(name='Editar post ${title}')
+    def edit_card(self, title):
+        # Tiene que estar la carta abierta (usar keyword "Comprobar que existe post...")
+        loc_edit = btn_card_edit.format(title)
+        self.osl.wait_until_element_is_visible(loc_edit)
+        self.osl.click_element(loc_edit)
+
     @keyword(name='Poner paginado en ${num}')
     def items_per_page(self, num):
         loc_option = btn_selector_option.format(num)
