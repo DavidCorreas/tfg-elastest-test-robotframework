@@ -75,10 +75,7 @@ class MobLogin(PageObject):
         # Intentamos logarnos, pero falla
         BuiltIn().run_keyword_and_ignore_error('Registrarse como ' + rol)
         try:
-            # TODO: BORRAR LOGS
-            BuiltIn().log_to_console('Intentamos cerrar el error')
             self._accept_error()
-            BuiltIn().log_to_console('Cerrado conrrectamente')
         except Exception as e:
             print(e)
 
@@ -109,6 +106,10 @@ class MobLogin(PageObject):
         self.osl.wait_until_element_is_visible(btn_logout)
         self.osl.click_element(btn_logout)
         self.osl.wait_until_element_is_visible(btn_top_login)
+
+    @keyword(name='Intentar Deslogarse')
+    def try_logout(self):
+        BuiltIn().run_keyword_and_ignore_error("Deslogarse")
 
     def _accept_error(self):
         # Aceptamos el error

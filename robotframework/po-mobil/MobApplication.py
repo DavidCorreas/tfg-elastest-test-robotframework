@@ -3,6 +3,7 @@ import json
 import os
 
 from robot.api.deco import keyword
+from robot.libraries.BuiltIn import BuiltIn
 from robotframework.po.common.PageObject import PageObject
 
 ROBOT_LIBRARY_DOC_FORMAT = 'HTML'
@@ -20,6 +21,9 @@ class MobApplication(PageObject):
     # ------------------------------- Keywords ------------------------------- #
     @keyword(name='Abrir aplicacion movil en ${platform}')
     def open_application(self, platform):
+        # Obtener la plataforma para todo el test
+        BuiltIn().set_test_variable("${platform}", platform)
+
         # Recuperar la url en base al entorno
         current_path = os.path.dirname(os.path.abspath(__file__))
         with open(current_path + '/../data/MobCapabilities.json') as caps:

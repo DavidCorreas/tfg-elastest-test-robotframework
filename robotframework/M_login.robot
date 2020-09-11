@@ -12,19 +12,6 @@ Library    po/common/Common.py
 
 
 *** Test Cases ***
-TEST-SETUP
-    [Documentation]  Test necesario para crear el usuario si no existe
-    Comment  Abrir Aplicacion
-    MobApplication.Abrir aplicacion movil en Android
-
-    Comment    Intentamos registrar a David si no existe su usuario
-    MobApplication.Capturar Pantallazo movil
-    MobLogin.Registrar a David si no existe
-
-    Comment  Cerramos la aplicacion
-    MobApplication.Capturar Pantallazo movil
-    MobApplication.Cerrar Aplicacion movil
-
 LOGIN-0001
     [Documentation]  Registro y loging con un usuario aleatorio
     ${USER}  Common.Randomize  user@random  4
