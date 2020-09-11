@@ -9,9 +9,20 @@ from robotframework.po.common.PageObject import PageObject
 
 ROBOT_LIBRARY_DOC_FORMAT = 'HTML'
 
-# Lista
-btn_card_title = "//mat-expansion-panel-header[span[contains(text(),'{}')]]"
+# TopBar
+btn_messages = "//a[@routerlink='/']"
 
+# Card
+btn_card_title = "//mat-expansion-panel-header[span[contains(text(),'{}')]]"
+img_card = "//img[contains(@src,'{}')]"
+cmp_card_content = "//p[contains(text(),'{}')]"
+btn_card_edit = "//mat-expansion-panel[." + btn_card_title + "]//a"
+btn_card_delete = "//mat-expansion-panel[." + btn_card_title + "]//button"
+
+
+# Selector paginado
+btn_selector = "//mat-select"
+btn_selector_option = "//mat-option[@ng-reflect-value='{}']"
 
 class MobList(PageObject):
 
@@ -23,6 +34,33 @@ class MobList(PageObject):
         super().__init__('AppiumLibrary')
 
     # ------------------------------- Keywords ------------------------------- #
-    @keyword(name='Comprobar que existe post con titulo "${title}", imagen "${image} y contenido ${content}"')
-    def access_new_post(self, title, image, content):
+    @keyword(name='Comprobar que existe post con titulo "${title}", con imagen y contenido "${content}"')
+    def check_post(self, title, content):
+        loc_title = btn_card_title.format(title)
+        loc_image = img_card.format(title.lower())
+        loc_content = cmp_card_content.format(content)
+        loc_edit = btn_card_edit.format(title)
+
+        # Comprobamos que este la tarjeta
+        self.osl.wait_until_element_is_visible(loc_title)
+
+        # Vemos si ya esta abierta y comprobamso que exista la imagen
+        try:
+            self.osl.wait_until_element_is_visible(loc_image)
+            # BuiltIn().wait_until_keyword_succeeds(5, 0.2, "AppiumLibrary.Scroll", loc_edit, btn_messages)
+        except:
+            self.osl.click_element(loc_title)
+            self.osl.wait_until_element_is_visible(loc_image)
+            # BuiltIn().wait_until_keyword_succeeds(5, 0.2, "AppiumLibrary.Scroll", loc_edit, btn_messages)
+        
+        self.osl.capture_page_screenshot()
+        self.osl.wait_until_element_is_visible(loc_content)
+
+    @keyword(name='Poner paginado en ${num}')
+    def items_per_page(self, num):
+        loc_option = btn_selector_option.format(num)
+        self.osl.wait_until_element_is_visible(btn_selector)
+        self.osl.click_element(btn_selector)
+        self.osl.wait_until_element_is_visible(loc_option)
+        self.osl.click_element(loc_option)
        

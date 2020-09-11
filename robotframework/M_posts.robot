@@ -7,6 +7,7 @@ Library    po/common/PythonPathScript.py
 Library    po-mobil/MobApplication.py
 Library    po-mobil/MobLogin.py
 Library    po-mobil/MobPost.py
+Library    po-mobil/MobList.py
 Library    po/common/Common.py
 
 *** Variables ***
@@ -31,6 +32,7 @@ TEST-SETUP
 POSTS-0001
     [Documentation]  Crear un post
     ${TITLE}  Common.Randomize  Titulo  4
+    ${CONTENT}  Common.Randomize  Contenido de prueba
 
     Comment  Abrir Aplicacion
     MobApplication.Abrir aplicacion movil en Android
@@ -43,9 +45,12 @@ POSTS-0001
     MobPost.Acceder a la creacion de un post
     MobPost.Introducir titulo ${TITLE}
     MobPost.Introducir imagen Imagen-URJC.jpg
-    MobPost.Introducir contenido "Contenido de prueba"
+    MobPost.Introducir contenido "${CONTENT}"
+    MobPost.Guardar post
 
     Comment  Comrpobar que se ha añadido bien
+    MobList.Poner paginado en 10
+    MobList.Comprobar que existe post con titulo "${TITLE}", con imagen y contenido "${CONTENT}"
 
     Comment  Logout y cerramos la aplicacion
     MobApplication.Capturar Pantallazo movil

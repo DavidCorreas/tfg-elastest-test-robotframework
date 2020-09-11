@@ -12,15 +12,16 @@ ROBOT_LIBRARY_DOC_FORMAT = 'HTML'
 # Crear post
 btn_new_post = "//a[@routerlink='/create']"
 btn_new_post_accent = btn_new_post +  "[contains(@class,'cdk-focused')]"
+btn_new_post_unselected = btn_new_post + "[not(contains(@class,'cdk-focused'))]"
 cpm_post_title = "//input[@type='text']"
 btn_pick_image = "//button[@type='button']"
 cmp_post_content = "//textarea"
+btn_save_post = "//button[@type='submit']"
 
 # Seleccionar fichero
 btn_hamburguesa = '//android.widget.ImageButton[@content-desc="Show roots"]'
 btn_downloads = "//android.widget.ListView//android.widget.TextView[@text='Downloads']"
 btn_imagen = "//android.widget.RelativeLayout[.//android.widget.TextView[@text='{}']]"
-# "//android.widget.TextView[@text='{}']"
 
 
 class MobPost(PageObject):
@@ -69,8 +70,13 @@ class MobPost(PageObject):
         # Esperamos a que aparezca la imagen
         self.osl.wait_until_element_is_visible("//img")
 
+    @keyword(name='Guardar post')
+    def save_post(self):
+        self.osl.wait_until_element_is_visible(btn_save_post)
+        self.osl.click_element(btn_save_post)
+        self.osl.wait_until_element_is_visible(btn_new_post_unselected)
+
     def _choose_file_android(self, image):
-        print("Empezamos a seleccionar")
         # Cambiamos de contexto a nativo de android
         self.osl.switch_to_context(self.osl.get_contexts()[0])
 
