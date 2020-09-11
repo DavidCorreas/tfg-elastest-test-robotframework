@@ -47,11 +47,9 @@ class MobList(PageObject):
         # Vemos si ya esta abierta y comprobamso que exista la imagen
         try:
             self.osl.wait_until_element_is_visible(loc_image)
-            # BuiltIn().wait_until_keyword_succeeds(5, 0.2, "AppiumLibrary.Scroll", loc_edit, btn_messages)
         except:
             self.osl.click_element(loc_title)
             self.osl.wait_until_element_is_visible(loc_image)
-            # BuiltIn().wait_until_keyword_succeeds(5, 0.2, "AppiumLibrary.Scroll", loc_edit, btn_messages)
         
         self.osl.capture_page_screenshot()
         self.osl.wait_until_element_is_visible(loc_content)

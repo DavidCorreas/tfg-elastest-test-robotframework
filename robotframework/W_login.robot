@@ -1,25 +1,34 @@
 *** Settings ***
 # Poner siempre #
-Test Teardown    Run Keyword If Test Failed    OutSystemsWeb.Capture Page Screenshot
+Test Teardown    Run Keyword If Test Failed    SeleniumLibrary.Capture Page Screenshot
 Library    po/common/PythonPathScript.py
 # ------------- #
 
 Library    po/WebApplication.py
 Library    po/WebLogin.py
+Library    po/common/Common.py
 
 *** Variables ***
 
 
 *** Test Cases ***
-LOGIN-0001
+WEB-LOGIN-0001
+    [Documentation]  Registro y loging con un usuario aleatorio
+    ${USER}  Common.Randomize  user@random  4
+    ${PASSWORD}  Common.Randomize  passwd
+
+    Comment  Abrir Aplicacion
     WebApplication.Abrir aplicacion
 
-    Comment    Login basico como administrador
+    Comment    SingUp
     WebApplication.Capturar Pantallazo
+    WebLogin.Registrarse con email ${USER} y contrasena ${PASSWORD}
 
-#    WebLogin.Logarse como Admin
-#    WebApplication.Capturar Pantallazo
-#    WebLogin.Deslogarse
-#    WebApplication.Capturar Pantallazo
+    Comment  LogIn
+    WebLogin.Logarse con email ${USER} y contrasena ${PASSWORD}
 
+    Comment  Logout y cerramos la aplicacion
+    WebApplication.Capturar Pantallazo
+    WebLogin.Deslogarse
+    WebApplication.Capturar Pantallazo
     WebApplication.Cerrar Aplicacion
