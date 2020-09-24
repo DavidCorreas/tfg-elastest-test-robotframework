@@ -64,7 +64,7 @@ class MobLogin(PageObject):
 
     @keyword(name='Registrar a ${rol} si no existe')
     def sing_up_if_not_exists(self, rol):
-        BuiltIn().run_keyword_and_ignore_error('Registrarse como ' + rol)
+        BuiltIn().run_keyword_and_ignore_error('MobLogin.Registrarse como ' + rol)
         try:
             self._accept_error()
         except Exception as e:
@@ -73,7 +73,7 @@ class MobLogin(PageObject):
     @keyword(name='Intentar volver a registrarse como ${rol}')
     def try_login(self, rol):
         # Intentamos logarnos, pero falla
-        BuiltIn().run_keyword_and_ignore_error('Registrarse como ' + rol)
+        BuiltIn().run_keyword_and_ignore_error('MobLogin.Registrarse como ' + rol)
         try:
             self._accept_error()
         except Exception as e:
@@ -109,7 +109,7 @@ class MobLogin(PageObject):
 
     @keyword(name='Intentar Deslogarse')
     def try_logout(self):
-        BuiltIn().run_keyword_and_ignore_error("Deslogarse")
+        BuiltIn().run_keyword_and_ignore_error("MobLogin.Deslogarse")
 
     def _accept_error(self):
         # Aceptamos el error
