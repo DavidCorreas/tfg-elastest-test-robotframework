@@ -1,7 +1,0 @@
-FROM localhost:5000/robotframework:latest
-
-COPY . .
-WORKDIR robotframework
-ENV PYTHONPATH "${PYTHONPATH}:/usr/src/app/"
-
-CMD robot -d "/tmp/results" ${test_cases} -v REMOTE_URL:${remote_url} -v COD_PAIS:${country} -v IS_REMOTE:${is_remote} -v ENVIRONMENT:${environment} -v BROWSER:${browser} ${test_suite}
