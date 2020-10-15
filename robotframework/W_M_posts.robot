@@ -87,7 +87,7 @@ MOBIL-WEB-POSTS-0001
     MobApplication.Capturar Pantallazo movil
     MobLogin.Deslogarse
     MobApplication.Capturar Pantallazo movil
-    MobApplication.Cerrar Aplicacion movil
+    MobApplication.Cerrar Aplicacion Y Sesion Appium
 
 MOBIL-WEB-POSTS-0002
     [Documentation]  Creamos un post en web y consultamos que se haya creado en el movil
@@ -134,7 +134,7 @@ MOBIL-WEB-POSTS-0002
     MobApplication.Capturar Pantallazo movil
     MobLogin.Deslogarse
     MobApplication.Capturar Pantallazo movil
-    MobApplication.Cerrar Aplicacion movil
+    MobApplication.Cerrar Aplicacion Y Sesion Appium
 
     # ==== Parte Movil ====
     Set Library Search Order  SeleniumLibrary

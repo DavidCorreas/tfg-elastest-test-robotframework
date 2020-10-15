@@ -20,6 +20,10 @@ LOGIN-0001
     Comment  Abrir Aplicacion
     MobApplication.Abrir aplicacion movil en Android
 
+    Comment    Intentamos deslogarnos por si había un usuario antes
+    MobApplication.Capturar Pantallazo movil
+    MobLogin.Intentar Deslogarse
+
     Comment    SingUp
     MobApplication.Capturar Pantallazo movil
     MobLogin.Registrarse con email ${USER} y contrasena ${PASSWORD}
@@ -31,4 +35,4 @@ LOGIN-0001
     MobApplication.Capturar Pantallazo movil
     MobLogin.Deslogarse
     MobApplication.Capturar Pantallazo movil
-    MobApplication.Cerrar Aplicacion movil
+    MobApplication.Cerrar Aplicacion Y Sesion Appium

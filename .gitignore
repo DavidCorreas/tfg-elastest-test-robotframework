@@ -8,6 +8,8 @@
 target/
 .idea/
 .vscode/
+venv/
+venv*/
 results/
 libraries/*.class
 __pycache__/

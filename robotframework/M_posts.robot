@@ -27,7 +27,7 @@ TEST-SETUP
     Comment  Cerramos la aplicacion
     MobLogin.Intentar Deslogarse
     MobApplication.Capturar Pantallazo movil
-    MobApplication.Cerrar Aplicacion movil
+    MobApplication.Cerrar Aplicacion Y Sesion Appium
 
 POSTS-0001
     [Documentation]  Crear un post
@@ -58,7 +58,7 @@ POSTS-0001
     MobApplication.Capturar Pantallazo movil
     MobLogin.Deslogarse
     MobApplication.Capturar Pantallazo movil
-    MobApplication.Cerrar Aplicacion movil
+    MobApplication.Cerrar Aplicacion Y Sesion Appium
 
 POSTS-0002
     [Documentation]  Editar post creado en prueba POSTS-0001
@@ -88,7 +88,7 @@ POSTS-0002
     MobApplication.Capturar Pantallazo movil
     MobLogin.Deslogarse
     MobApplication.Capturar Pantallazo movil
-    MobApplication.Cerrar Aplicacion movil
+    MobApplication.Cerrar Aplicacion Y Sesion Appium
 
 POSTS-0003
     [Documentation]  Eliminar post creado en prueba POSTS-0001 y editado en POSTS-0002
@@ -111,4 +111,4 @@ POSTS-0003
     MobApplication.Capturar Pantallazo movil
     MobLogin.Deslogarse
     MobApplication.Capturar Pantallazo movil
-    MobApplication.Cerrar Aplicacion movil
+    MobApplication.Cerrar Aplicacion Y Sesion Appium
