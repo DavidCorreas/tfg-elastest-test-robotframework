@@ -11,23 +11,27 @@ class PageObject:
 
     COD_PAIS = "es"
     ENVIRONMENT = "DEV"
-    REMOTE_URL_MOB = "http://localhost:4444/wd/hub"
-    # Endpoint elastest slenium grid
-    REMOTE_URL = "http://localhost:37000/eus/v1/"
-
-    BROWSER = "gc"
+    BROWSER = "chrome"
+    VERSION = "85.0"
     IS_REMOTE = False
     RESOLUTION = "FHD"
+    # Endpoint selenium hub
+    REMOTE_URL_MOB = "http://localhost:4444/wd/hub"
+    # Endpoint selenoid
+    REMOTE_URL = "http://localhost:4445/wd/hub"
 
     def __init__(self, library):
 
         # variables
         BuiltIn().import_library(library)
         self.osl = BuiltIn().get_library_instance(library)
+        self.osl.set_selenium_timeout(15)
 
         # Variables por defecto
         if self._get_browser() is None:
             BuiltIn().set_suite_variable("${browser}", self.BROWSER)
+        if self._get_version() is None:
+            BuiltIn().set_suite_variable("${version}", self.VERSION)
         if self._get_cod_pais() is None:
             BuiltIn().set_suite_variable("${cod_pais}", self.COD_PAIS)
         if self._get_environment() is None:
@@ -53,6 +57,10 @@ class PageObject:
     @staticmethod
     def _get_browser():
         return BuiltIn().get_variable_value("${browser}")
+
+    @staticmethod
+    def _get_version():
+        return BuiltIn().get_variable_value("${version}")
 
     @staticmethod
     def _get_environment():

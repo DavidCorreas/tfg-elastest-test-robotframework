@@ -2,8 +2,8 @@ version: "3"
 services:
   test :
     build:
-      context: ../..
-      dockerfile: Jenkins/JenkinsRemote/dockerfile
+      context: ./..
+      dockerfile: Local/dockerfile
     environment:
       browser: ${browser}
       country: ${country}
@@ -13,10 +13,11 @@ services:
       test_suite: ${test_suite}
     user: ${HOST_UID_GID}
     volumes:
-      - ${node_workspace_windows}/results:/tmp/results
+      - ${node_workspace_windows}:/tmp/results
     networks:
-      - default
+      - selenoid
+
 networks:
-  default:
+  selenoid:
     external:
-      name: jenkins_net
+      name: tfg-elastest_selenoid

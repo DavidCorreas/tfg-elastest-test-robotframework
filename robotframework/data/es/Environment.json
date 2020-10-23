@@ -2,6 +2,9 @@
     "Environments" : {
         "DEV" : {
             "Url" : "http://localhost:4200"
+        },
+        "TEST" : {
+            "Url" : "http://angular:4200"
         }
     }
 }

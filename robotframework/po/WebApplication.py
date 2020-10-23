@@ -44,16 +44,29 @@ class WebApplication(PageObject):
             resolution = "1920x1080x24"
             if self._get_resolution() == 'HD':
                 resolution = "1280x720x24"
-            # Capabilities
+
+            # Capabilities elastest
+            # capabilities = {
+            #     "live": True,
+            #     "enableLog": True,
+            #     "screenResolution": resolution,
+            #     "name": suite_name + "." + test_name,
+            #     "chromeOptions": {
+            #         "args": ["live=true", "elastestTimeout=0"]
+            #     }
+            # }
+
+            # Capabilities selenoid
             capabilities = {
-                "live": True,
+                "enableVNC": True,
+                "browserName": self._get_browser(),
+                "version": self._get_version(),
+                "enableVideo": False,
                 "enableLog": True,
                 "screenResolution": resolution,
-                "name": suite_name + "." + test_name,
-                "chromeOptions": {
-                    "args": ["live=true", "elastestTimeout=0"]
-                }
+                "name": suite_name + "." + test_name
             }
+
             self.osl.open_browser(url,
                                   self._get_browser(),
                                   remote_url=self._get_remote_url(),

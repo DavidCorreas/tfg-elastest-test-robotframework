@@ -1,0 +1,13 @@
+#Ignore files
+*.pyc
+*.log
+*.class
+
+#Ignore directory
+__pycache__/
+target/
+.idea/
+.vscode/
+results/
+venv-ubuntu/
+src/test/resources/robotframework/libraries/*.class

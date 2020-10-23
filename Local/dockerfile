@@ -1,0 +1,31 @@
+FROM python:3.8
+
+WORKDIR /usr/src/app
+
+COPY Jenkins/Environment/requirements.txt ./
+
+# Instalamos las dependencias
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+
+# We need wget to set up the PPA and xvfb to have a virtual screen and unzip to install the Chromedriver
+RUN apt-get update
+RUN apt-get install -y wget xvfb unzip
+
+# Set up Chromedriver Environment variables
+ENV CHROMEDRIVER_VERSION 85.0.4183.38
+ENV CHROMEDRIVER_DIR /chromedriver
+RUN mkdir $CHROMEDRIVER_DIR
+
+# Download and install Chromedriver
+RUN wget -q --continue -P $CHROMEDRIVER_DIR "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+RUN unzip $CHROMEDRIVER_DIR/chromedriver* -d $CHROMEDRIVER_DIR
+
+# Put Chromedriver into the PATH
+ENV PATH $CHROMEDRIVER_DIR:$PATH
+
+COPY . .
+WORKDIR /usr/src/app/robotframework
+ENV PYTHONPATH "${PYTHONPATH}:/usr/src/app/"
+
+CMD robot -d "/tmp/results" ${test_cases} -v REMOTE_URL:${remote_url} -v REMOTE_URL_MOB:${remote_url_mob} -v COD_PAIS:${country} -v IS_REMOTE:True -v ENVIRONMENT:${environment} -v BROWSER:${browser} -v VERSION:${version} ${test_suite}

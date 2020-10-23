@@ -20,7 +20,8 @@ btn_card_delete = "//mat-expansion-panel[." + btn_card_title + "]//button"
 
 # Selector paginado
 btn_selector = "//mat-select"
-btn_selector_option = "//mat-option[@ng-reflect-value='{}']"
+btn_selector_option = "//span[contains(text(),'{}')]/.."
+# btn_selector_option = "//mat-option[@ng-reflect-value='{}']"
 
 class WebList(PageObject):
 
