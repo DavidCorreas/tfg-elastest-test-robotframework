@@ -75,8 +75,13 @@ class MobPost(PageObject):
     @keyword(name='Guardar post')
     def save_post(self):
         self.osl.wait_until_element_is_visible(btn_save_post)
-        self.osl.click_element(btn_save_post)
-        self.osl.wait_until_element_is_visible(btn_new_post_unselected)
+        BuiltIn().sleep(2)
+        BuiltIn().wait_until_keyword_succeeds(20, 0.2, '_Intentar guardar')
+
+    @keyword(name='_Intentar guardar')
+    def try_to_save(self):
+        BuiltIn().run_keyword_and_ignore_error('Click Element', btn_save_post)
+        self.osl.wait_until_page_does_not_contain_element(btn_save_post)
 
     def _choose_file_android(self, image):
         # Cambiamos de contexto a nativo de android

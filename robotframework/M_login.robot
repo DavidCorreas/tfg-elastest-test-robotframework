@@ -1,6 +1,6 @@
 *** Settings ***
 # Poner siempre #
-Test Teardown    Run Keyword If Test Failed    MobApplication.Capturar Pantallazo movil
+Test Teardown    Run Keyword If Test Failed    Teardown
 Library    po/common/PythonPathScript.py
 # ------------- #
 
@@ -34,5 +34,11 @@ LOGIN-0001
     Comment  Logout y cerramos la aplicacion
     MobApplication.Capturar Pantallazo movil
     MobLogin.Deslogarse
+    MobApplication.Capturar Pantallazo movil
+    MobApplication.Cerrar Aplicacion Y Sesion Appium
+
+*** Keywords ***
+
+Teardown
     MobApplication.Capturar Pantallazo movil
     MobApplication.Cerrar Aplicacion Y Sesion Appium

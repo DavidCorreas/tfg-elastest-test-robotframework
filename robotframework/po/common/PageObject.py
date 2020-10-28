@@ -25,7 +25,10 @@ class PageObject:
         # variables
         BuiltIn().import_library(library)
         self.osl = BuiltIn().get_library_instance(library)
-        self.osl.set_selenium_timeout(15)
+        if library == 'SeleniumLibrary':
+            self.osl.set_selenium_timeout(15)
+        if library == 'AppiumLibrary':
+            self.osl.set_appium_timeout(15)
 
         # Variables por defecto
         if self._get_browser() is None:

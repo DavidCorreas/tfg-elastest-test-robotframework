@@ -30,7 +30,7 @@ class MobApplication(PageObject):
             capabilities = json.load(caps)
 
         self.osl.open_application(
-            remote_url=self._get_remote_url_mob(), deviceName="emulator-5554",
+            remote_url=self._get_remote_url_mob(),
             platformName=capabilities[platform]["platformName"], app=capabilities[platform]["app"],
             noReset=True, disableWindowAnimation=True, nativeWebScreenshot=True,
             androidScreenshotPath='results/screenshots',
