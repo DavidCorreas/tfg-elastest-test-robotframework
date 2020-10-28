@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 services:
   test :
     build:
@@ -9,15 +9,10 @@ services:
       country: ${country}
       environment: ${environment}
       remote_url: ${remote_url}
+      remote_url_mob: ${remote_url_mob}
       test_cases: ${test_cases}
       test_suite: ${test_suite}
     user: ${HOST_UID_GID}
     volumes:
       - ${node_workspace_windows}:/tmp/results
-    networks:
-      - selenoid
-
-networks:
-  selenoid:
-    external:
-      name: tfg-elastest_selenoid
+    

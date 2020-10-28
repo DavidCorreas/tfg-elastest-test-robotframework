@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  test :
+    networks:
+    - grid
+  
+networks:
+  grid:
+    external:
+      name: tfg-elastest_grid
