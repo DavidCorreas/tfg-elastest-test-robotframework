@@ -3,7 +3,7 @@ services:
   test:
     build:
       context: ../..
-      dockerfile: Jenkins/JenkinsRemoteProxy/dockerfile
+      dockerfile: Jenkins/JenkinsRemote/dockerfile # Use other dockerfile
     environment:
       browser: ${browser}
       version: ${version}
