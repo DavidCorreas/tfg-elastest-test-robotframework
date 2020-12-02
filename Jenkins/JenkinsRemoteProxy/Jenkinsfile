@@ -29,7 +29,7 @@ pipeline {
                     echo test_suite=$TEST_SUITE >> .env
                 '''
 
-                sh 'sh -x ./Jenkins/JenkinsRemoteProxy/run_test.sh'
+                sh 'sh -x ./Jenkins/JenkinsRemoteProxy/run-test-selenoid.sh'
             }
         }
     }

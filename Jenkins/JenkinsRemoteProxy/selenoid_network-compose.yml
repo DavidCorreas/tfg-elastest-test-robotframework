@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  test :
+    networks:
+    - selenoid
+
+networks:
+  selenoid:
+    external:
+      name: tfg-elastest_selenoid
