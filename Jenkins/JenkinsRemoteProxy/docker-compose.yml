@@ -17,7 +17,3 @@ services:
       - ${RESULTS_URL}:/tmp/workspace
     networks:
       - default
-networks:
-  default:
-    external:
-      name: jenkins_net
