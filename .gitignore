@@ -3,6 +3,7 @@
 *.log
 *.class
 *.png
+Local/.env
 
 #Ignore directory
 target/
