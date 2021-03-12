@@ -21,66 +21,78 @@ class PageObject:
     REMOTE_URL = "http://localhost:4445/wd/hub"
 
     def __init__(self, library):
+        self.library = library
 
-        # variables
-        BuiltIn().import_library(library)
-        self.osl = BuiltIn().get_library_instance(library)
-        if library == 'SeleniumLibrary':
-            self.osl.set_selenium_timeout(15)
-        if library == 'AppiumLibrary':
-            self.osl.set_appium_timeout(15)
-
-        # Variables por defecto
-        if self._get_browser() is None:
-            BuiltIn().set_suite_variable("${browser}", self.BROWSER)
-        if self._get_version() is None:
-            BuiltIn().set_suite_variable("${version}", self.VERSION)
-        if self._get_cod_pais() is None:
-            BuiltIn().set_suite_variable("${cod_pais}", self.COD_PAIS)
-        if self._get_environment() is None:
-            BuiltIn().set_suite_variable("${environment}", self.ENVIRONMENT)
-        if self._get_is_remote() is None:
-            BuiltIn().set_suite_variable("${is_remote}", self.IS_REMOTE)
-        if self._get_remote_url() is None:
-            BuiltIn().set_suite_variable("${remote_url}", self.REMOTE_URL)
-        if self._get_resolution() is None:
-            BuiltIn().set_suite_variable("${resolution}", self.RESOLUTION)
-        if self._get_remote_url_mob() is None:
-            BuiltIn().set_suite_variable("${remote_url_mob}", self.REMOTE_URL_MOB)
+    @property
+    def osl(self):
+        BuiltIn().import_library(self.library)
+        osl = BuiltIn().get_library_instance(self.library)
+        if self.library == 'SeleniumLibrary':
+            osl.set_selenium_timeout(15)
+        if self.library == 'AppiumLibrary':
+            osl.set_appium_timeout(15)
 
         current_path = os.path.dirname(os.path.realpath(__file__))
         current_path = os.path.join(current_path, "../..", "data", "ReferenceData.py")
         current_path = current_path.replace('\\', '/')
+        print("Current paths: " + current_path)
         BuiltIn().import_variables(current_path)
 
-    @staticmethod
-    def _get_cod_pais():
-        return BuiltIn().get_variable_value("${cod_pais}")
+        return osl
 
-    @staticmethod
-    def _get_browser():
-        return BuiltIn().get_variable_value("${browser}")
+    @property
+    def _get_cod_pais(self):
+        cod_pais = BuiltIn().get_variable_value("${cod_pais}")
+        if cod_pais is None:
+            cod_pais = self.COD_PAIS
+        return cod_pais
 
-    @staticmethod
-    def _get_version():
-        return BuiltIn().get_variable_value("${version}")
+    @property
+    def _get_browser(self):
+        browser = BuiltIn().get_variable_value("${browser}")
+        if browser is None:
+            browser = self.BROWSER
+        return browser
 
-    @staticmethod
-    def _get_environment():
-        return BuiltIn().get_variable_value("${environment}")
+    @property
+    def _get_version(self):
+        version = BuiltIn().get_variable_value("${version}")
+        if version is None:
+            version = self.VERSION
+        return version
 
-    @staticmethod
-    def _get_resolution():
-        return BuiltIn().get_variable_value("${resolution}")
+    @property
+    def _get_environment(self):
+        environment = BuiltIn().get_variable_value("${environment}")
+        if environment is None:
+            environment = self.ENVIRONMENT
+        return environment
 
-    @staticmethod
-    def _get_is_remote():
-        return BuiltIn().get_variable_value("${is_remote}")
+    @property
+    def _get_resolution(self):
+        resolution = BuiltIn().get_variable_value("${resolution}")
+        if resolution is None:
+            resolution = self.RESOLUTION
+        return resolution
 
-    @staticmethod
-    def _get_remote_url():
-        return BuiltIn().get_variable_value("${remote_url}")
+    @property
+    def _get_is_remote(self):
+        is_remote = BuiltIn().get_variable_value("${is_remote}")
+        if is_remote is None:
+            is_remote = self.IS_REMOTE
+        return is_remote
 
-    @staticmethod
-    def _get_remote_url_mob():
-        return BuiltIn().get_variable_value("${remote_url_mob}")
+    @property
+    def _get_remote_url(self):
+        remote_url = BuiltIn().get_variable_value("${remote_url}")
+        if remote_url is None:
+            remote_url = self.REMOTE_URL
+        return remote_url
+
+    @property
+    def _get_remote_url_mob(self):
+        remote_url_mob = BuiltIn().get_variable_value("${remote_url_mob}")
+        if remote_url_mob is None:
+            remote_url_mob = self.REMOTE_URL_MOB
+        return remote_url_mob
+

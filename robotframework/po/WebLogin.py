@@ -34,11 +34,14 @@ class WebLogin(PageObject):
     # ------------------------------- Locators ------------------------------- #
     def __init__(self):
         super().__init__('SeleniumLibrary')
+        
+    @property
+    def user_data(self):
         current_path = os.path.dirname(os.path.abspath(__file__))
-        file_name = current_path + "/../data/" + self._get_cod_pais() + '/Users.json'
+        file_name = current_path + "/../data/" + self._get_cod_pais + '/Users.json'
         with open(file_name) as user_file:
-            self.user_data = json.load(user_file)
-
+            return json.load(user_file)
+            
     # ------------------------------- Keywords ------------------------------- #
     @keyword(name='Registrarse con email ${email} y contrasena ${password}')
     def singup_with_credentials(self, email, password):
