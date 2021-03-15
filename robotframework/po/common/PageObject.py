@@ -35,7 +35,6 @@ class PageObject:
         current_path = os.path.dirname(os.path.realpath(__file__))
         current_path = os.path.join(current_path, "../..", "data", "ReferenceData.py")
         current_path = current_path.replace('\\', '/')
-        print("Current paths: " + current_path)
         BuiltIn().import_variables(current_path)
 
         return osl

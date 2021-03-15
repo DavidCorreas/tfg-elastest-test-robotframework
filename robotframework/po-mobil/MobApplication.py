@@ -37,6 +37,7 @@ class MobApplication(PageObject):
             automationName=capabilities[platform]["automationName"], newCommandTimeout=60000, appWaitDuration=30000, autoGrantPermissions=True)
 
         self.osl.switch_to_context(self.osl.get_contexts()[1])
+        self.osl.capture_page_screenshot()
 
     @keyword(name='Cerrar Aplicacion movil')
     def close_application(self):

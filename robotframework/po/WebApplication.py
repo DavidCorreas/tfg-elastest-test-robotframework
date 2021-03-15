@@ -66,6 +66,7 @@ class WebApplication(PageObject):
             self.osl.open_browser(url, self._get_browser)
 
         self.osl.maximize_browser_window()
+        self.osl.capture_page_screenshot()
 
     @keyword(name='Cerrar Aplicacion')
     def close_application(self):

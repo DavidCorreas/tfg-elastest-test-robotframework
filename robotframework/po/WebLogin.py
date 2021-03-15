@@ -1,29 +1,17 @@
 import json
 import os
 
-from robot.libraries.BuiltIn import BuiltIn
 from robot.api.deco import keyword
 from robotframework.po.common.PageObject import PageObject
 
 ROBOT_LIBRARY_DOC_FORMAT = 'HTML'
 
 # Login
-btn_top_login = "//a[@href='/auth/login']"
-cmp_email = "//input[@name='email']"
-cpm_password = "//input[@name='password']"
-btn_submit_login = "//button[@type='submit']"
-
-# SingUp
-btn_top_singup = "//a[@href='/auth/singup']"
-btn_submit_singup = "//button[@type='submit']"
-dialog_error = "//mat-dialog-container"
-btn_accept_error = dialog_error + "//button"
-
-# Logout
-btn_logout = "//button/*[text()='LogOut']"
-
-# Pagina posts
-list_posts = "//app-post-list"
+btn_top_login = "//div[contains(@id,'LoginInfo')]//i"
+cmp_email = "//*[@id='Input_UsernameVal']"
+cpm_password = "//*[@id='Input_PasswordVal']"
+btn_submit_login = "(//button[@type='submit'])[1]"
+img_login = "//img[@class='img-circle']"
 
 
 class WebLogin(PageObject):
@@ -43,78 +31,46 @@ class WebLogin(PageObject):
             return json.load(user_file)
             
     # ------------------------------- Keywords ------------------------------- #
-    @keyword(name='Registrarse con email ${email} y contrasena ${password}')
-    def singup_with_credentials(self, email, password):
-        # Accedemos a la pagina para registrarnos
-        self.osl.wait_until_element_is_visible(btn_top_singup)
-        self.osl.click_element(btn_top_singup)
-        self.osl.wait_until_element_is_visible(cmp_email)
-        
-        # Introducimos credenciales
-        self.osl.input_text(cmp_email, email)
-        self.osl.input_text(cpm_password, password)
+    @keyword(name='SignUp con nombre ${name}, email ${email} y contraseña ${pass}')
+    def singup_with_credentials(self, name, email, password):
+        pass
 
-        # Clickamos para registrarnos
-        self.osl.click_element(btn_submit_singup)
-        self.osl.wait_until_element_is_visible(list_posts)
-
-    @keyword(name='Registrarse como ${rol}')
+    @keyword(name='SignUp como ${rol}')
     def sing_up(self, rol):
+        name = self.user_data["Credenciales"][rol]["Name"]
         email = self.user_data["Credenciales"][rol]["Email"]
         password = self.user_data["Credenciales"][rol]["Password"]
-        self.singup_with_credentials(email, password)
 
-    @keyword(name='Registrar a ${rol} si no existe')
-    def sing_up_if_not_exists(self, rol):
-        BuiltIn().run_keyword_and_ignore_error('WebLogin.Registrarse como ' + rol)
-        try:
-            self._accept_error()
-        except Exception as e:
-            print(e)
+        self.singup_with_credentials(name, email, password)
 
-    @keyword(name='Intentar volver a registrarse como ${rol}')
-    def try_login(self, rol):
-        # Intentamos logarnos, pero falla
-        BuiltIn().run_keyword_and_ignore_error('WebLogin.Registrarse como ' + rol)
-        try:
-            self._accept_error()
-        except Exception as e:
-            print(e)
-
-    @keyword(name='Logarse con email ${email} y contrasena ${password}')
+    @keyword(name='LogIn con email "${email}" y contrasena "${password}"')
     def login_with_credentials(self, email, password):
         # Accedemos al login.
         self.osl.wait_until_element_is_visible(btn_top_login)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(btn_top_login)
+
         self.osl.wait_until_element_is_visible(cmp_email)
-        
-        # Introducimos credenciales
         self.osl.input_text(cmp_email, email)
         self.osl.input_text(cpm_password, password)
+        self.osl.capture_page_screenshot()
 
         # Clickamos logearnos
         self.osl.click_element(btn_submit_login)
-        self.osl.wait_until_element_is_visible(list_posts)
+        self.osl.wait_until_element_is_visible(img_login)
+        self.osl.capture_page_screenshot()
 
-    @keyword(name='Logarse como ${rol}')
+    @keyword(name='LogIn como ${rol}')
     def login_as(self, rol):
         email = self.user_data["Credenciales"][rol]["Email"]
         password = self.user_data["Credenciales"][rol]["Password"]
         self.login_with_credentials(email, password)
 
-    @keyword(name='Deslogarse')
+    @keyword(name='LogOut')
     def logout(self):
         # Clicamos el logout
-        self.osl.wait_until_element_is_visible(btn_logout, 3)
-        self.osl.click_element(btn_logout)
-        self.osl.wait_until_element_is_visible(btn_top_login)
-
-    @keyword(name='Intentar Deslogarse')
-    def try_logout(self):
-        BuiltIn().run_keyword_and_ignore_error("WebLogin.Deslogarse")
-
-    def _accept_error(self):
-        # Aceptamos el error
-        self.osl.wait_until_element_is_visible(dialog_error)
-        self.osl.click_element(btn_accept_error)
-
+        self.osl.wait_until_element_is_visible(btn_top_login, 3)
+        self.osl.capture_page_screenshot()
+        self.osl.click_element(btn_top_login)
+        self.osl.wait_until_element_is_not_visible(img_login)
+        self.osl.capture_page_screenshot()

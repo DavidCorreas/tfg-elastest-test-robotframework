@@ -1,8 +1,9 @@
 {
     "Credenciales" : {
         "David" : {
-            "Password" : "1234",
-            "Email" : "david@tfg-elastest.com"
+            "Name": "David Correas Oliver",
+            "Password" : "hello",
+            "Email" : "david.correas@innoqa.es"
         }
     }
 }
