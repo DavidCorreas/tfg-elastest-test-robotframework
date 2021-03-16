@@ -25,7 +25,7 @@ class PageObject:
         self.library = library
 
     @not_keyword
-    def go_pages(self, loc_btn, loc_wait):
+    def _go_pages(self, loc_btn, loc_wait):
         self.osl.wait_until_page_contains_element(loc_btn)
         self.osl.scroll_element_into_view(loc_btn)
         self.osl.capture_page_screenshot()

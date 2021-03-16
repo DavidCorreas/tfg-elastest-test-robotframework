@@ -27,22 +27,22 @@ class WebHome(PageObject):
     # ------------------------------- Keywords ------------------------------- #
     @keyword(name='Ir a la página')
     def go_home(self):
-        self.go_pages(btn_home, btn_phones)
+        self._go_pages(btn_home, btn_phones)
 
     @keyword(name='Entrar en la pagina de portatiles')
     def go_laptops(self):
-        self.go_pages(btn_laptops, title_laptops)
+        self._go_pages(btn_laptops, title_laptops)
 
     @keyword(name='Entrar en la pagina de móviles')
     def go_mob(self):
-        self.go_pages(btn_phones, title_phones)
+        self._go_pages(btn_phones, title_phones)
 
     @keyword(name='Entrar en la pagina de accesorios')
     def go_accessories(self):
-        self.go_pages(btn_accesories, title_accessories)
+        self._go_pages(btn_accesories, title_accessories)
 
     @keyword(name='Entrar en la pagina de favoritos')
     def go_favs(self):
-        self.go_pages(btn_favs, title_favs)
+        self._go_pages(btn_favs, title_favs)
 
 

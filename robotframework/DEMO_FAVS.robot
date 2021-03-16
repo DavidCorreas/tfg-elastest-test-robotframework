@@ -7,7 +7,7 @@ Library           po/WebHome.py
 Library           po/WebPhones.py
 Library           po/WebLaptops.py
 Library           po/WebAccessories.py
-
+Library           po/WebFavourites.py
 
 *** Variables ***
 
@@ -36,5 +36,7 @@ ADD-TO-FAVS
     WebAccessories.Entrar en el primer resultado
     WebAccessories.Detalles.Añadir a favoritos
 
+    WebFavourites.Ir a la página
+    WebFavourites.Comprobar favoritos guardados
     WebLogin.LogOut
     WebApplication.Cerrar Aplicacion

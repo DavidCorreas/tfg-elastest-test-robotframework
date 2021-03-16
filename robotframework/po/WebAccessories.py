@@ -7,6 +7,7 @@ ROBOT_LIBRARY_DOC_FORMAT = 'HTML'
 btn_accessories = "//a[contains(@href,'Accessories')]"
 title_accessories = "//div[@id='Title'][text()='Accessories']"
 
+cmp_filter = "//input[contains(@id,'Input_Search')]"
 btn_lowest = "//button[contains(@id,'LowestPrice')]"
 btn_search = "//button[contains(@id,'Button_search')]"
 btn_clear = "//a[contains(@id,'Link_Clear')]"
@@ -17,6 +18,7 @@ loc_phone_title = "//div[contains(@id,'Column2')]/span[text()='{}']"
 loc_detail_title = "//div[contains(@id,'Column2')]/span"
 
 # Detalles
+btn_fav = "//div[@id='AddOrRemoveToFavorites']"
 btn_add_favs = "//button[@id='Button_AddFavorites']"
 btn_remove_favs = "//button[@id='Button_RemoveFavorites']"
 
@@ -32,11 +34,12 @@ class WebAccessories(PageObject):
     # ------------------------------- Keywords ------------------------------- #
     @keyword(name='Ir a la página')
     def go_home(self):
-        self.go_pages(btn_accessories, title_accessories)
+        self._go_pages(btn_accessories, title_accessories)
 
     @keyword(name='Filtros.Buscar con el texto ${text}')
     def filter_text(self, text):
-        pass
+        self.osl.wait_until_element_is_visible(cmp_filter)
+        self.osl.input_text(cmp_filter, text)
 
     @keyword(name='Filtros.Precio más alto primero')
     def filter_highest(self):
@@ -99,11 +102,14 @@ class WebAccessories(PageObject):
 
     @keyword(name='Detalles.Añadir a favoritos')
     def add_to_favs(self):
+        self.osl.wait_until_element_is_visible(btn_fav)
         try:
-            self.osl.wait_until_element_is_visible(btn_add_favs)
+            self.osl.wait_until_element_is_visible(btn_add_favs, timeout=1)
+            self.osl.click_element(btn_add_favs)
         except AssertionError:
             BuiltIn().log("El dispositivo ya estaba añadido a favoritos.")
-            return
-        self.osl.click_element(btn_add_favs)
+
         self.osl.wait_until_element_is_visible(btn_remove_favs)
-        BuiltIn().set_global_variable("${FAV_PHONE}", self.osl.get_text(loc_detail_title))
+        title = self.osl.get_text(loc_detail_title)
+        BuiltIn().log("El accesorio {} ha sido guardado en favoritos.".format(title), console=True)
+        BuiltIn().set_global_variable("${FAV_ACCESSORIES}", title)
