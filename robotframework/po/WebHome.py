@@ -45,10 +45,4 @@ class WebHome(PageObject):
     def go_favs(self):
         self.go_pages(btn_favs, title_favs)
 
-    def go_pages(self, loc_btn, loc_wait):
-        self.osl.wait_until_page_contains_element(loc_btn)
-        self.osl.scroll_element_into_view(loc_btn)
-        self.osl.capture_page_screenshot()
-        self.osl.click_element(loc_btn)
-        self.osl.wait_until_page_contains_element(loc_wait)
-        self.osl.capture_page_screenshot()
+

@@ -5,6 +5,7 @@ Este Page Object encapsula la funcionalidad del Login
 # Import libraries
 import os
 from robot.libraries.BuiltIn import BuiltIn
+from robot.api.deco import not_keyword
 
 
 class PageObject:
@@ -22,6 +23,15 @@ class PageObject:
 
     def __init__(self, library):
         self.library = library
+
+    @not_keyword
+    def go_pages(self, loc_btn, loc_wait):
+        self.osl.wait_until_page_contains_element(loc_btn)
+        self.osl.scroll_element_into_view(loc_btn)
+        self.osl.capture_page_screenshot()
+        self.osl.click_element(loc_btn)
+        self.osl.wait_until_page_contains_element(loc_wait)
+        self.osl.capture_page_screenshot()
 
     @property
     def osl(self):

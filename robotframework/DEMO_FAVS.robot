@@ -4,6 +4,9 @@ Library           po/common/PythonPathScript.py
 Library           po/WebApplication.py
 Library           po/WebLogin.py
 Library           po/WebHome.py
+Library           po/WebPhones.py
+Library           po/WebLaptops.py
+Library           po/WebAccessories.py
 
 
 *** Variables ***
@@ -15,13 +18,23 @@ ADD-TO-FAVS
     WebApplication.Abrir Aplicacion
     WebLogin.LogIn con email "david.correas@innoqa.es" y contrasena "hello"
 
-    WebHome.Entrar en la pagina de portatiles
-    WebHome.Ir a la página
     WebHome.Entrar en la pagina de móviles
-    WebHome.Ir a la página
-    WebHome.Entrar en la pagina de accesorios
-    WebHome.Ir a la página
-    WebHome.Entrar en la pagina de favoritos
+    WebPhones.Filtros.Precio más bajo primero
+    WebPhones.Filtros.Buscar
+    WebPhones.Entrar en el primer resultado
+    WebPhones.Detalles.Añadir a favoritos
+
+    WebLaptops.Ir a la página
+    WebLaptops.Filtros.Precio más bajo primero
+    WebLaptops.Filtros.Buscar
+    WebLaptops.Entrar en el primer resultado
+    WebLaptops.Detalles.Añadir a favoritos
+
+    WebAccessories.Ir a la página
+    WebAccessories.Filtros.Precio más bajo primero
+    WebAccessories.Filtros.Buscar
+    WebAccessories.Entrar en el primer resultado
+    WebAccessories.Detalles.Añadir a favoritos
 
     WebLogin.LogOut
     WebApplication.Cerrar Aplicacion
