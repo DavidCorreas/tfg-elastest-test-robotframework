@@ -1,3 +1,73 @@
+defaultBrowsersChoices = ['chrome']
+browserChoices = createChoicesWithPreviousChoice(defaultBrowsersChoices, "${params.BROWSER}")
+defaultDeviceChoices = ['Mac-emulator', 'David-emulator']
+deviceChoices = createChoicesWithPreviousChoice(defaultDeviceChoices, "${params.DEVICE}")
+defaultCountriesChoices = ['es','br','fr','us','sg']
+countryChoices = createChoicesWithPreviousChoice(defaultCountriesChoices, "${params.COUNTRY}")
+defaultEnvironmentsChoices = ['DEV','QA']
+environmentChoices = createChoicesWithPreviousChoice(defaultEnvironmentsChoices, "${params.ENVIRONMENT}")
+
+properties([
+    buildDiscarder(logRotator(daysToKeepStr: '20')),
+
+    parameters([
+        choice(choices: browserChoices.join("\n"),
+                        description: 'Browsers disponibles para ejecutar en remoto. Si se usa selenoid, deben estar definidos en browsers.json.',
+                        name: 'BROWSER'),
+
+        choice(choices: ['85.0'],
+                description: 'Indica la versión el navegador Chrome a usar en Selenoid.',
+                name: 'VERSION'),
+
+        choice(choices: countryChoices.join("\n"),
+                description: 'Lenguaje a utilizar.',
+                name: 'COUNTRY'),
+
+        choice(choices: environmentChoices.join("\n"),
+                description: 'Entorno donde ejecutar.',
+                name: 'ENVIRONMENT'),
+
+        choice(choices: deviceChoices.join("\n"),
+                    description: 'Dispositivo donde ejecutar.',
+                    name: 'DEVICE'),
+
+        string(name: 'REMOTE_URL',
+                defaultValue: params.REMOTE_URL ?:'http://selenoid:4444/wd/hub',
+                description: 'End point donde recibe las peticiones el servidor que ejecuta las aplicaciones web (Selenoid).'),
+
+        string(name: 'TEST_CASES',
+                defaultValue: params.TEST_CASES ?:'',
+                description: 'Test cases a ejecutar. Deben de encontrarse en los test suites definidos en la variable TEST_SUITE y se definen precedidos de un `-t`.\n Ejemplo: `-t PRUEBA1 -t PRUEBA2`'),
+
+        string(name: 'TEST_SUITE',
+                defaultValue: params.TEST_SUITE ?:'',
+                description: 'Suites a ejecutar. Se definen tal como se haría en linea de comandos precedido por el comando `robot`.'),
+
+        string(name: 'SLAVE_WORKSPACE',
+                defaultValue: params.SLAVE_WORKSPACE ?:'/home/jenkins/agent/workspace/PIPELINE-DEMO',
+                description: 'Es el workspace de Jenkins donde se copiaran los archivos para construir el docker con las pruebas.\n Se trata de la ruta del workspace viendola desde dentro del docker del esclavo.'),
+
+        string(name: 'HOST_WORKSPACE',
+                defaultValue: params.HOST_WORKSPACE ?:'/tmp/workspace/PIPELINE-DEMO',
+                description: 'Workspace donde se ejecuta la prueba, desde el punto de vista de la máquina HOST. Se trata del mismo directorio que SLAVE_WORKSPACE, pero desde fuera del docker.\n En este directorio el docker python que ejecute la prueba dejará los resultados.'),
+
+        string(name: 'NODE_LABEL',
+                defaultValue: 'DOCKER',
+                description: 'Nodo donde se van a ejecutar las pruebas y que es capaz de ejecutar comandos docker y tiene acceso a los ficheros.')
+
+    ])
+])
+
+List createChoicesWithPreviousChoice(List defaultChoices, String previousChoice) {
+    if (previousChoice == "null") {
+       return defaultChoices
+    }
+    choices = defaultChoices.minus(previousChoice)
+    choices.add(0, previousChoice)
+    return choices
+}
+
+
 pipeline {
     agent {
         node {

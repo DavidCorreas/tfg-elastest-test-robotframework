@@ -22,7 +22,7 @@ class PageObject:
     REMOTE_URL_MOB = "http://localhost:4444/wd/hub"
     LOCAL_URL_MOB = "http://localhost:4723/wd/hub"
     # Endpoint selenoid
-    REMOTE_URL = "http://localhost:4445/wd/hub"
+    REMOTE_URL = "http://selenoid:4445/wd/hub"
 
     def __init__(self, library):
         self.library = library
