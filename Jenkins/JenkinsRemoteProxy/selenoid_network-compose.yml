@@ -4,8 +4,13 @@ services:
   test :
     networks:
     - selenoid
+    - net_selenium
 
 networks:
   selenoid:
     external:
       name: tfg-elastest_selenoid
+  # Para el selenium hub que tiene moviles
+  net_selenium:
+    external:
+      name: net_selenium
