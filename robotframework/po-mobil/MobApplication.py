@@ -38,7 +38,8 @@ class MobApplication(PageObject):
             platformName=capabilities[platform]["platformName"], app=app,
             disableWindowAnimation=True, nativeWebScreenshot=True,
             androidScreenshotPath='results/screenshots',
-            automationName=capabilities[platform]["automationName"], autoGrantPermissions=True)
+            automationName=capabilities[platform]["automationName"], autoGrantPermissions=True,
+            newCommandTimeout=60000, appWaitDuration=30000)
 
         self.osl.switch_to_context(self.osl.get_contexts()[1])
         self.osl.capture_page_screenshot()
