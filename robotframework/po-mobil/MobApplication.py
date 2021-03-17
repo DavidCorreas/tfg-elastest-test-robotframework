@@ -49,6 +49,7 @@ class MobApplication(PageObject):
 
     @keyword(name='Cerrar Aplicacion Y Sesion Appium')
     def close_session(self):
+        self.osl.capture_page_screenshot()
         self.osl.close_application()
 
     @keyword(name='Capturar Pantallazo movil')

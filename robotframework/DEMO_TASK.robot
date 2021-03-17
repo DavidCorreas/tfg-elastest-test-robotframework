@@ -1,5 +1,5 @@
 *** Settings ***
-Test Teardown     Run Keyword If Test Failed    MobApplication.Capturar Pantallazo Movil
+Test Teardown     Run Keyword If Test Failed    MobApplication.Cerrar Aplicacion Y Sesion Appium
 Library           po/common/PythonPathScript.py
 Library           po-mobil/MobApplication.py
 Library           po-mobil/MobLogin.py
