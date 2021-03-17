@@ -1,9 +1,9 @@
 {
     "Android": {
         "automationName": "uiautomator2",
-        "platformVersion": "8.1",
+        "platformVersion": "9.0",
         "platformName": "Android",
-        "app": "/opt/app-debug.apk"
+        "app": "C:\\Users\\DavidCorreas\\Documents\\tfg-no-emulator\\tfg-elastest-test\\tfg-elastest-test-robotframework\\robotframework\\data\\fake-files\\Task_Manager.apk"
     },
     "iOS": {
         "app": "TODO",

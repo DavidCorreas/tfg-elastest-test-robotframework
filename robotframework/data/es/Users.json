@@ -4,6 +4,11 @@
             "Name": "David Correas Oliver",
             "Password" : "hello",
             "Email" : "david.correas@innoqa.es"
+        },
+        "Miguel": {
+            "Name": "Miguel Angel Cervera",
+            "Password" : "Gr@tis69",
+            "Email" : "miguel.cervera@innoqa.es"
         }
     }
 }
