@@ -36,15 +36,18 @@ class MobProject(PageObject):
     @keyword(name='Ir a la página')
     def go_page(self):
         self.osl.wait_until_element_is_visible(btn_bottom_project)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(btn_bottom_project)
         self.osl.wait_until_element_is_visible(header_project)
 
     @keyword(name='Crear proyecto con nombre "${project}"')
     def login_with_credentials(self, project):
         self.osl.wait_until_element_is_visible(btn_new_project)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(btn_new_project)
         self.osl.wait_until_element_is_visible(cmp_name)
         self.osl.input_text(cmp_name, project)
+        self.osl.capture_page_screenshot()
         self.osl.wait_until_element_is_visible(btn_add)
         self.osl.capture_page_screenshot()
         self.osl.click_element(btn_add)
@@ -54,11 +57,13 @@ class MobProject(PageObject):
     def go_project(self, project):
         item_project_name = item_project.format(project)
         self.osl.wait_until_element_is_visible(item_project_name)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(item_project_name)
 
     @keyword(name='DetalleProyecto.Crear tarea en proyecto vacio con nombre "${name}" y fecha "${date}"')
     def new_task(self, name, date):
         self.osl.wait_until_element_is_visible(btn_new_task)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(btn_new_task)
         self.osl.wait_until_element_is_visible(cmp_name)
         self.osl.input_text(cmp_name, name)
@@ -71,6 +76,7 @@ class MobProject(PageObject):
     @keyword(name='DetalleProyecto.Volver a proyectos')
     def return_project(self):
         self.osl.wait_until_element_is_visible(btn_back)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(btn_back)
         self.osl.wait_until_element_is_visible(header_project)
 
@@ -78,6 +84,7 @@ class MobProject(PageObject):
     def check_task(self, nombre_tarea):
         checkbox = chk_task_name.format(nombre_tarea)
         self.osl.wait_until_element_is_visible(checkbox)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(checkbox)
         self.osl.wait_until_element_is_visible(checkbox + "[@checked]")
         self._ps_emergent_msg_check_mobile()

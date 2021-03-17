@@ -30,6 +30,7 @@ class MobTask(PageObject):
     @keyword(name='Ir a la página')
     def go_page(self):
         self.osl.wait_until_element_is_visible(btn_bottom_task)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(btn_bottom_task)
         self.osl.wait_until_element_is_visible(header_task)
 
@@ -37,6 +38,7 @@ class MobTask(PageObject):
     def go_tab(self, nombre_pestana):
         tab = btn_tab_name.format(nombre_pestana)
         self.osl.wait_until_element_is_visible(tab)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(tab)
         self.osl.wait_until_element_is_visible(tab + "[contains(@class,'active')]")
 
@@ -44,12 +46,15 @@ class MobTask(PageObject):
     def go_task(self, nombre_tarea):
         item = task_item_name.format(nombre_tarea)
         self.osl.wait_until_element_is_visible(item)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(item)
         self.osl.wait_until_element_is_visible(btn_icon_trash)
+        self.osl.capture_page_screenshot()
 
     @keyword(name='DetalleTarea.Borrar tarea')
     def delete_task(self):
         self.osl.wait_until_element_is_visible(btn_icon_trash)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(btn_icon_trash)
         self.osl.wait_until_element_is_visible(btn_confirm_delete)
         self.osl.click_element(btn_confirm_delete)
@@ -58,9 +63,11 @@ class MobTask(PageObject):
     @keyword(name='Crear tarea con nombre "${name}", dia "${day}"')
     def login_with_credentials(self, name, day):
         self.osl.wait_until_element_is_visible(btn_new_task)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(btn_new_task)
         self.osl.wait_until_element_is_visible(cmp_name)
         self.osl.input_text(cmp_name, name)
+        self.osl.capture_page_screenshot()
         self._ps_android_set_date(fch_date, day)
         self.osl.wait_until_element_is_visible(btn_add)
         self.osl.capture_page_screenshot()
