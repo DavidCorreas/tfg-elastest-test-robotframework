@@ -33,10 +33,16 @@ class WebLogin(PageObject):
     # ------------------------------- Keywords ------------------------------- #
     @keyword(name='SignUp con nombre ${name}, email ${email} y contraseña ${pass}')
     def singup_with_credentials(self, name, email, password):
+        """
+        Registrase en la aplicación con un nombre, email y contraseña.
+        """
         pass
 
     @keyword(name='SignUp como ${rol}')
     def sing_up(self, rol):
+        """
+        Registrase en la aplicación con un rol guardado en datos de referencia.
+        """
         name = self.user_data["Credenciales"][rol]["Name"]
         email = self.user_data["Credenciales"][rol]["Email"]
         password = self.user_data["Credenciales"][rol]["Password"]
@@ -45,6 +51,9 @@ class WebLogin(PageObject):
 
     @keyword(name='LogIn con email "${email}" y contrasena "${password}"')
     def login_with_credentials(self, email, password):
+        """
+        Acceder a la aplicacion con el email y contraseña especificados.
+        """
         # Accedemos al login.
         self.osl.wait_until_element_is_visible(btn_top_login)
         self.osl.capture_page_screenshot()
@@ -62,12 +71,18 @@ class WebLogin(PageObject):
 
     @keyword(name='LogIn como ${rol}')
     def login_as(self, rol):
+        """
+        Acceder aplicacion con un rol guardado en los datos de referencia.
+        """
         email = self.user_data["Credenciales"][rol]["Email"]
         password = self.user_data["Credenciales"][rol]["Password"]
         self.login_with_credentials(email, password)
 
     @keyword(name='LogOut')
     def logout(self):
+        """
+        Hacer LogOut de la aplicación. Debe de estar la barra de navegación inferior disponible.
+        """
         # Clicamos el logout
         self.osl.wait_until_element_is_visible(btn_top_login, 3)
         self.osl.capture_page_screenshot()

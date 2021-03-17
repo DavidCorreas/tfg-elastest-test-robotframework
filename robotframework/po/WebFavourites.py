@@ -34,19 +34,31 @@ class WebFavourites(PageObject):
     # ------------------------------- Keywords ------------------------------- #
     @keyword(name='Ir a la página')
     def go_home(self):
+        """
+        Navegar a la página de accesorios. Debe de estar visible la pestaña.
+        """
         self._go_pages(btn_favs, title_favs)
 
     @keyword(name='Filtros.Buscar con el texto ${text}')
     def filter_text(self, text):
+        """
+        En el filtro, busca por el texto pero no le da a buscar (Para buscar: Filtros.Buscar)
+        """
         self.osl.wait_until_element_is_visible(cmp_filter)
         self.osl.input_text(cmp_filter, text)
 
     @keyword(name='Filtros.Precio más alto primero')
     def filter_highest(self):
+        """
+        En el filtro, clica el botón de 'Highest price' (Para buscar: Filtros.Buscar)
+        """
         pass
 
     @keyword(name='Filtros.Precio más bajo primero')
     def filter_lowest(self):
+        """
+        En el filtro, clica el botón de 'Lowest price' (Para buscar: Filtros.Buscar)
+        """
         btn_lowest_selected = btn_lowest + "[contains(@class,'selected')]"
         self.osl.wait_until_element_is_visible(btn_lowest)
         try:
@@ -79,16 +91,26 @@ class WebFavourites(PageObject):
     @keyword(name=
              'Filtros.Mostrar favoritos con precio desde ${precio_bajo} hasta ${precio_alto}')
     def filter_price(self, precio_bajo, precio_alto):
+        """
+        En el filtro, pone un rango de precios siendo 'precio_bajo' el boton de la izquierda y
+        'precio_alto' el boton de la derecha (Para buscar: Filtros.Buscar)
+        """
         pass
 
     @keyword(name='Filtros.Buscar')
     def filter_search(self):
+        """
+        Aplica los filtros pulsando el botón filtrar.
+        """
         self.osl.wait_until_element_is_visible(btn_search)
         self.osl.click_element(btn_search)
         self.osl.wait_until_element_is_visible(btn_clear)
 
     @keyword(name='Filtros.Limpiar filtros')
     def filters_clear(self):
+        """
+        Limpia los filtros pulsando el botón de 'clear'. Solo disponible cuando ya se ha filtrado.
+        """
         pass
 
     @keyword(name='Comprobar que existe favorito con nombre ${nom_fav}')
@@ -97,6 +119,10 @@ class WebFavourites(PageObject):
 
     @keyword(name='Comprobar favoritos guardados')
     def check_favs(self):
+        """
+        Si la prueba ha agregado a favoritos algún producto, comprueba que exista como favoritos.
+        Para ello los busca individualmente y comprueba que estén.
+        """
         fav_phone = BuiltIn().get_variable_value("${FAV_PHONE}")
         BuiltIn().log("Telefonos guardados: {}".format(fav_phone), console=True)
         fav_laptop = BuiltIn().get_variable_value("${FAV_LAPTOP}")

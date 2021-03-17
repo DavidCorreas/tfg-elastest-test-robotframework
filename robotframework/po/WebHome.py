@@ -27,22 +27,37 @@ class WebHome(PageObject):
     # ------------------------------- Keywords ------------------------------- #
     @keyword(name='Ir a la página')
     def go_home(self):
+        """
+        Navegar a la página de home. Debe de estar visible la pestaña.
+        """
         self._go_pages(btn_home, btn_phones)
 
     @keyword(name='Entrar en la pagina de portatiles')
     def go_laptops(self):
+        """
+        Navegar a la página de portátiles. Debe de estar visible el boton en el home.
+        """
         self._go_pages(btn_laptops, title_laptops)
 
     @keyword(name='Entrar en la pagina de móviles')
     def go_mob(self):
+        """
+        Navegar a la página de portátiles. Debe de estar visible el boton en el home.
+        """
         self._go_pages(btn_phones, title_phones)
 
     @keyword(name='Entrar en la pagina de accesorios')
     def go_accessories(self):
+        """
+        Navegar a la página de accesorios. Debe de estar visible el boton en el home.
+        """
         self._go_pages(btn_accesories, title_accessories)
 
     @keyword(name='Entrar en la pagina de favoritos')
     def go_favs(self):
+        """
+        Navegar a la página de favoritos. Debe de estar visible el boton en el home.
+        """
         self._go_pages(btn_favs, title_favs)
 
 

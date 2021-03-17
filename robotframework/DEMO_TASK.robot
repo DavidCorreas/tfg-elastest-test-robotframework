@@ -17,8 +17,8 @@ NEW-TASK
     MobLogin.LogIn con usuario "miguel.cervera@innoqa.es" y contrasena "Gr@tis69"
 
     MobProject.Ir a la página
-    MobProject.Crear proyecto con nombre "Projecto demo"
-    MobProject.Entrar en el proyecto "Projecto demo"
+    MobProject.Crear proyecto con nombre "Proyecto demo"
+    MobProject.Entrar en el proyecto "Proyecto demo"
     MobProject.DetalleProyecto.Crear tarea en proyecto vacio con nombre "Prueba Tarea" y fecha "23-05-2021"
     MobProject.DetalleProyecto.Marcar "Prueba Tarea" como completado
     MobProject.DetalleProyecto.Volver a proyectos

@@ -23,6 +23,9 @@ class WebApplication(PageObject):
     # ------------------------------- Keywords ------------------------------- #
     @keyword(name='Abrir aplicacion')
     def open_application(self):
+        """
+        Abrir un navegador para que se pueda ejecutar la prueba.
+        """
         # Recuperar la url en base al entorno
         current_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -70,8 +73,14 @@ class WebApplication(PageObject):
 
     @keyword(name='Cerrar Aplicacion')
     def close_application(self):
+        """
+        Cerrar navegador.
+        """
         self.osl.close_all_browsers()
 
     @keyword(name='Capturar Pantallazo')
     def capture_page_screenshot(self):
+        """
+        Realizar una captura de pantalla sobre la aplicacion.
+        """
         self.osl.capture_page_screenshot()

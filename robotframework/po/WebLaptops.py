@@ -34,22 +34,36 @@ class WebLaptops(PageObject):
     # ------------------------------- Keywords ------------------------------- #
     @keyword(name='Ir a la página')
     def go_home(self):
+        """
+        Navegar a la página de portátiles. Debe de estar visible la pestaña.
+        """
         self._go_pages(btn_laptops, title_laptops)
 
     @keyword(name='Filtros.Buscar con el texto ${text}')
     def filter_text(self, text):
+        """
+        En el filtro, busca por el texto pero no le da a buscar (Para buscar: Filtros.Buscar)
+        """
         self.osl.wait_until_element_is_visible(cmp_filter)
         self.osl.input_text(cmp_filter, text)
+        self.osl.capture_page_screenshot()
 
     @keyword(name='Filtros.Precio más alto primero')
     def filter_highest(self):
+        """
+        En el filtro, clica el botón de 'Highest price' (Para buscar: Filtros.Buscar)
+        """
         pass
 
     @keyword(name='Filtros.Precio más bajo primero')
     def filter_lowest(self):
+        """
+        En el filtro, clica el botón de 'Lowest price' (Para buscar: Filtros.Buscar)
+        """
         btn_lowest_selected = btn_lowest + "[contains(@class,'selected')]"
         self.osl.wait_until_element_is_visible(btn_lowest)
         try:
+            self.osl.capture_page_screenshot()
             self.osl.wait_until_element_is_visible(btn_lowest_selected,
                                                    timeout=0.5)
         except:
@@ -58,6 +72,7 @@ class WebLaptops(PageObject):
 
         # Pulsar boton buscar
         self.osl.wait_until_element_is_visible(btn_search)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(btn_search)
         self.osl.wait_until_element_is_visible(btn_clear)
 
@@ -79,38 +94,60 @@ class WebLaptops(PageObject):
     @keyword(name=
              'Filtros.Mostrar portatiles con precio desde ${precio_bajo} hasta ${precio_alto}')
     def filter_price(self, precio_bajo, precio_alto):
+        """
+        En el filtro, pone un rango de precios siendo 'precio_bajo' el boton de la izquierda y
+        'precio_alto' el boton de la derecha (Para buscar: Filtros.Buscar)
+        """
         pass
 
     @keyword(name='Filtros.Buscar')
     def filter_search(self):
+        """
+        Aplica los filtros pulsando el botón filtrar.
+        """
         self.osl.wait_until_element_is_visible(btn_search)
+        self.osl.capture_page_screenshot()
         self.osl.click_element(btn_search)
         self.osl.wait_until_element_is_visible(btn_clear)
 
     @keyword(name='Filtros.Limpiar filtros')
     def filters_clear(self):
+        """
+        Limpia los filtros pulsando el botón de 'clear'. Solo disponible cuando ya se ha filtrado.
+        """
         pass
 
     @keyword(name='Entrar en el primer resultado')
     def go_first(self):
+        """
+        Entre todos los resultados, entra en el detalle del primero.
+        """
         loc_first_result = result_with_number.format("1")
         loc_first_result_name = loc_first_result + "//span[contains(@id,'ProductName')]"
         self.osl.wait_until_element_is_visible(loc_first_result)
+        self.osl.capture_page_screenshot()
         first_result_name = self.osl.get_text(loc_first_result_name)
         BuiltIn().wait_until_keyword_succeeds(5, 0.2, "Click Element", loc_first_result)
+        self.osl.capture_page_screenshot()
         self.osl.wait_until_element_is_visible(loc_phone_title.format(first_result_name))
 
     @keyword(name='Detalles.Añadir a favoritos')
     def add_to_favs(self):
+        """
+        Dentro del detalle del portatil, añade a favoritos y se lo guarda en una variable por si se
+        usa en la keyword: WebFavourites.Comprobar favoritos guardados
+        """
         self.osl.wait_until_element_is_visible(btn_fav)
         try:
             self.osl.wait_until_element_is_visible(btn_add_favs, timeout=1)
+            self.osl.capture_page_screenshot()
             self.osl.click_element(btn_add_favs)
         except AssertionError:
             BuiltIn().log("El dispositivo ya estaba añadido a favoritos.")
 
         self.osl.wait_until_element_is_visible(btn_remove_favs)
         title = self.osl.get_text(loc_detail_title)
+        self.osl.capture_page_screenshot()
         BuiltIn().log("El portátil {} ha sido guardado en favoritos.".format(title), console=True)
         BuiltIn().set_global_variable("${FAV_LAPTOP}", title)
 
