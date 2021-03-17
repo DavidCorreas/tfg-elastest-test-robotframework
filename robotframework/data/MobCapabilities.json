@@ -3,7 +3,8 @@
         "automationName": "uiautomator2",
         "platformVersion": "9.0",
         "platformName": "Android",
-        "app": "C:\\Users\\DavidCorreas\\Documents\\tfg-no-emulator\\tfg-elastest-test\\tfg-elastest-test-robotframework\\robotframework\\data\\fake-files\\Task_Manager.apk"
+        "app": "C:\\Users\\DavidCorreas\\Documents\\tfg-no-emulator\\tfg-elastest-test\\tfg-elastest-test-robotframework\\robotframework\\data\\fake-files\\Task_Manager.apk",
+        "remote_app": "/opt/Task_Manager.apk"
     },
     "iOS": {
         "app": "TODO",

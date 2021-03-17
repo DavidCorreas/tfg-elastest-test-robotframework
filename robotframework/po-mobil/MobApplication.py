@@ -30,11 +30,12 @@ class MobApplication(PageObject):
             capabilities = json.load(caps)
 
         appium_url = self._get_remote_url_mob if self._get_is_remote else self._get_local_url_mob
+        app = capabilities[platform]["remote_app"] if self._get_is_remote else capabilities[platform]["app"]
 
         self.osl.open_application(
             remote_url=appium_url,
             deviceName='emulator-5554',
-            platformName=capabilities[platform]["platformName"], app=capabilities[platform]["app"],
+            platformName=capabilities[platform]["platformName"], app=app,
             disableWindowAnimation=True, nativeWebScreenshot=True,
             androidScreenshotPath='results/screenshots',
             automationName=capabilities[platform]["automationName"], autoGrantPermissions=True)
