@@ -42,7 +42,16 @@ class WebPhones(PageObject):
     @keyword(name='Filtros.Buscar con el texto ${text}')
     def filter_text(self, text):
         """
-        En el filtro, busca por el texto pero no le da a buscar (Para buscar: Filtros.Buscar)
+        Filtros: Interactua con los filtros en la parte superior de la página.
+
+        Interactua con el filtro superior de texto con el placeholder "Search". Introduce el texto
+        pasado por parámetro ${text}.
+
+        Nota: Si se desea filtrar por este texto utilice la keyword "Filtros.Buscar".
+
+        Pasos:
+        - Espera a que el campo de texto esté en la página.
+        - Introduce el texto del parámetro ${text} en la página.
         """
         self.osl.wait_until_element_is_visible(cmp_filter)
         self.osl.input_text(cmp_filter, text)
@@ -58,7 +67,15 @@ class WebPhones(PageObject):
     @keyword(name='Filtros.Precio más bajo primero')
     def filter_lowest(self):
         """
-        En el filtro, clica el botón de 'Lowest price' (Para buscar: Filtros.Buscar)
+        Filtros: Interactua con los filtros en la parte superior de la página.
+
+        Ordena la página de móviles de precio más bajo a precio más alto.
+
+        Nota: Si se desea ordenar por esta política utilice la keyword "Filtros.Buscar".
+
+        Pasos:
+        - Espera a que el botón "Lowest Price" esté en la página.
+        - Clica el botón "Lowest Price" en el filtro.
         """
         btn_lowest_selected = btn_lowest + "[contains(@class,'selected')]"
         self.osl.wait_until_element_is_visible(btn_lowest)
@@ -103,7 +120,16 @@ class WebPhones(PageObject):
     @keyword(name='Filtros.Buscar')
     def filter_search(self):
         """
-        Aplica los filtros pulsando el botón filtrar.
+        Filtros: Interactua con los filtros en la parte superior de la página.
+
+        Una vez insertado los filtros, los aplica mediante el botón de "Search".
+
+        Nota: Si se quiere aplicar algún filtro, debe de rellenarse antes algún campo mediante las
+        keywords anotadas con "Filtro.<keyword>".
+
+        Pasos:
+        - Espera a que el botón "Search" esté en la página.
+        - Clica en el botón "Search".
         """
         self.osl.wait_until_element_is_visible(btn_search)
         self.osl.capture_page_screenshot()
@@ -113,14 +139,26 @@ class WebPhones(PageObject):
     @keyword(name='Filtros.Limpiar filtros')
     def filters_clear(self):
         """
+        Filtros: Interactua con los filtros en la parte superior de la página.
+
         Limpia los filtros pulsando el botón de 'clear'. Solo disponible cuando ya se ha filtrado.
+
+        Pasos:
+        - Espera a que el botón "Clear" esté disponible en la página.
+        - Clica el botón de "Clear".
         """
         pass
 
     @keyword(name='Entrar en el primer resultado')
     def go_first(self):
         """
-        Entre todos los resultados, entra en el detalle del primero.
+        Entre todos los registros que aparecen en la página, selecciona y mira el detalle del
+        primero que aparece.
+
+        Pasos:
+        - Espera por que haya almenos un resultado.
+        - Selecciona el primer registro.
+        - Espera a que aparezca el detalle del registro.
         """
         loc_first_result = result_with_number.format("1")
         loc_first_result_name = loc_first_result + "//span[contains(@id,'ProductName')]"
@@ -134,8 +172,15 @@ class WebPhones(PageObject):
     @keyword(name='Detalles.Añadir a favoritos')
     def add_to_favs(self):
         """
-        Dentro del detalle del accesorio, añade a favoritos y se lo guarda en una variable por si se
-        usa en la keyword: WebFavourites.Comprobar favoritos guardados
+        Detalles: Interactua con la pantalla de detalle de un dispositivo.
+
+        Dentro del detalle del dispositivo, añade a favoritos y se lo guarda en una variable por si se
+        usa en la keyword: WebFavourites.Comprobar favoritos guardados.
+
+        Pasos:
+        - Espera a que exista el botón de favoritos dentro del detalle.
+        - Marca el botón de favoritos si no estaba marcado. Si ya lo estaba, lo deja como está.
+        - (La prueba se guarda en que ese dispositivo se ha añadido a favoritos)
         """
         self.osl.wait_until_element_is_visible(btn_fav)
         try:

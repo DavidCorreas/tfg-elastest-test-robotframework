@@ -24,7 +24,19 @@ class WebApplication(PageObject):
     @keyword(name='Abrir aplicacion')
     def open_application(self):
         """
-        Abrir un navegador para que se pueda ejecutar la prueba.
+        Abre un navegador con la página "Product Catalg". Si se ejecuta la prueba en local, ejecuta
+        un navegador. Si se desea, se puede usar un navegador de un proveedor indicando en la variable
+        "IS_REMOTE":True e indicando en la variable "REMOTE_URL":<url-proveedor> la url que exponga
+        el proveedor.
+
+        Por defecto se abre el entorno de "DEV" por defecto, pero se puede cambiar la página que
+        se desea abrir seleccionando un entorno en concreto mediante la variable "ENVIRONMENT". Para
+        asignar esta variable use el -v ENVIRONTMENT:<env> para que se abra otro entorno.
+
+        Pasos:
+        - Abre un navegador.
+        - Introduce la url del entorno seleccionado.
+        - Maximiza la pantalla.
         """
         # Recuperar la url en base al entorno
         current_path = os.path.dirname(os.path.abspath(__file__))
