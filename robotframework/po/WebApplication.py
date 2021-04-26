@@ -21,7 +21,7 @@ class WebApplication(PageObject):
         super().__init__('SeleniumLibrary')
 
     # ------------------------------- Keywords ------------------------------- #
-    @keyword(name='Abrir aplicacion')
+    @keyword(name='Open Application')
     def open_application(self):
         """
         Abre un navegador con la página "Product Catalg". Si se ejecuta la prueba en local, ejecuta
@@ -83,7 +83,7 @@ class WebApplication(PageObject):
         self.osl.maximize_browser_window()
         self.osl.capture_page_screenshot()
 
-    @keyword(name='Cerrar Aplicacion')
+    @keyword(name='Close application')
     def close_application(self):
         """
         Cerrar navegador.

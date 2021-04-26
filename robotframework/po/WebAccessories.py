@@ -32,7 +32,7 @@ class WebAccessories(PageObject):
         super().__init__('SeleniumLibrary')
 
     # ------------------------------- Keywords ------------------------------- #
-    @keyword(name='Ir a la página')
+    @keyword(name='Go to page')
     def go_home(self):
         """
         Navegar a la página de accesorios. Debe de estar visible la pestaña.
@@ -55,7 +55,7 @@ class WebAccessories(PageObject):
         """
         pass
 
-    @keyword(name='Filtros.Precio más bajo primero')
+    @keyword(name='Filters.Lowest price first')
     def filter_lowest(self):
         """
         En el filtro, clica el botón de 'Lowest price' (Para buscar: Filtros.Buscar)
@@ -100,7 +100,7 @@ class WebAccessories(PageObject):
         """
         pass
 
-    @keyword(name='Filtros.Buscar')
+    @keyword(name='Filters.Search')
     def filter_search(self):
         """
         Aplica los filtros pulsando el botón filtrar.
@@ -117,7 +117,7 @@ class WebAccessories(PageObject):
         """
         pass
 
-    @keyword(name='Entrar en el primer resultado')
+    @keyword(name='Go to details of the first result')
     def go_first(self):
         """
         Entre todos los resultados, entra en el detalle del primero.
@@ -131,7 +131,7 @@ class WebAccessories(PageObject):
         self.osl.capture_page_screenshot()
         self.osl.wait_until_element_is_visible(loc_phone_title.format(first_result_name))
 
-    @keyword(name='Detalles.Añadir a favoritos')
+    @keyword(name='Details.Add to favourites')
     def add_to_favs(self):
         """
         Dentro del detalle del accesorio, añade a favoritos y se lo guarda en una variable por si se

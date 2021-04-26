@@ -49,7 +49,7 @@ class WebLogin(PageObject):
 
         self.singup_with_credentials(name, email, password)
 
-    @keyword(name='LogIn con email "${email}" y contrasena "${password}"')
+    @keyword(name='LogIn with email "${email}" and password "${password}"')
     def login_with_credentials(self, email, password):
         """
         Acceder a la aplicacion con el email y contraseña especificados.

@@ -32,7 +32,7 @@ class WebFavourites(PageObject):
         super().__init__('SeleniumLibrary')
 
     # ------------------------------- Keywords ------------------------------- #
-    @keyword(name='Ir a la página')
+    @keyword(name='Go to page')
     def go_home(self):
         """
         Navegar a la página de accesorios. Debe de estar visible la pestaña.
@@ -117,7 +117,7 @@ class WebFavourites(PageObject):
     def check_name_fav(self, nom_fav):
         pass
 
-    @keyword(name='Comprobar favoritos guardados')
+    @keyword(name='Check saved favourites')
     def check_favs(self):
         """
         Si la prueba ha agregado a favoritos algún producto, comprueba que exista como favoritos.

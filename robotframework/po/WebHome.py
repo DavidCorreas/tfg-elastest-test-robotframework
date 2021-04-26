@@ -39,17 +39,17 @@ class WebHome(PageObject):
         """
         self._go_pages(btn_laptops, title_laptops)
 
-    @keyword(name='Entrar en la pagina de móviles')
+    @keyword(name='Go mobile page')
     def go_mob(self):
         """
-        Desde la página de Home, navega a la página de portátiles.
+        From the Home page, navigate to the laptops page.
 
-        Esta navegación se hace mediante el botón dedicado a ello en la sección
+        This navigation is done by using the dedicated button in the section
         "Find what you are looking for".
 
-        Pasos:
-        - Espera a que el botón "Phone" esté en la página
-        - Pulsa el botón "Phone"
+        Steps:
+        - Wait until the "Phone" button is on the page.
+        - Click on the "Phone" button
         """
         self._go_pages(btn_phones, title_phones)
 

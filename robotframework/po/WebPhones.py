@@ -32,50 +32,50 @@ class WebPhones(PageObject):
         super().__init__('SeleniumLibrary')
 
     # ------------------------------- Keywords ------------------------------- #
-    @keyword(name='Ir a la página')
+    @keyword(name='Go to page')
     def go_home(self):
         """
         Navegar a la página de moviles. Debe de estar visible la pestaña.
         """
         self._go_pages(btn_phones, title_phones)
 
-    @keyword(name='Filtros.Buscar con el texto ${text}')
+    @keyword(name='Filters.Search with text ${text}')
     def filter_text(self, text):
         """
-        Filtros: Interactua con los filtros en la parte superior de la página.
+        Filters: Interact with the filters at the top of the page.
 
-        Interactua con el filtro superior de texto con el placeholder "Search". Introduce el texto
-        pasado por parámetro ${text}.
+        Interact with the top text filter with the "Search" placeholder. Enter the text
+        passed by parameter ${text}.
 
-        Nota: Si se desea filtrar por este texto utilice la keyword "Filtros.Buscar".
+        Note: If you want to filter by this text use the keyword "Filters.Search".
 
-        Pasos:
-        - Espera a que el campo de texto esté en la página.
-        - Introduce el texto del parámetro ${text} en la página.
+        Steps:
+        - Wait until the text field is on the page.
+        - Enter the text from the ${text} parameter on the page.
         """
         self.osl.wait_until_element_is_visible(cmp_filter)
         self.osl.input_text(cmp_filter, text)
         self.osl.capture_page_screenshot()
 
-    @keyword(name='Filtros.Precio más alto primero')
+    @keyword(name='Filters.Highest price first')
     def filter_highest(self):
         """
         En el filtro, clica el botón de 'Highest price' (Para buscar: Filtros.Buscar)
         """
         pass
 
-    @keyword(name='Filtros.Precio más bajo primero')
+    @keyword(name='Filters.Lowest price first')
     def filter_lowest(self):
         """
-        Filtros: Interactua con los filtros en la parte superior de la página.
+        Filters: Interact with the filters at the top of the page.
 
-        Ordena la página de móviles de precio más bajo a precio más alto.
+        Sorts the mobile page from lowest price to highest price.
 
-        Nota: Si se desea ordenar por esta política utilice la keyword "Filtros.Buscar".
+        Note: If you want to sort by this policy use the keyword "Filters.Search".
 
-        Pasos:
-        - Espera a que el botón "Lowest Price" esté en la página.
-        - Clica el botón "Lowest Price" en el filtro.
+        Steps:
+        - Wait until the "Lowest Price" button is on the page.
+        - Click the "Lowest Price" button in the filter.
         """
         btn_lowest_selected = btn_lowest + "[contains(@class,'selected')]"
         self.osl.wait_until_element_is_visible(btn_lowest)
@@ -108,8 +108,7 @@ class WebPhones(PageObject):
             tryes -= 1
             BuiltIn().sleep(1)
 
-    @keyword(name=
-             'Filtros.Mostrar dispositivos con precio desde ${precio_bajo} hasta ${precio_alto}')
+    @keyword(name= 'Filters.Show devices with price from ${low_price} to ${high_price}.')
     def filter_price(self, precio_bajo, precio_alto):
         """
         En el filtro, pone un rango de precios siendo 'precio_bajo' el boton de la izquierda y
@@ -117,48 +116,47 @@ class WebPhones(PageObject):
         """
         pass
 
-    @keyword(name='Filtros.Buscar')
+    @keyword(name='Filters.Search')
     def filter_search(self):
         """
-        Filtros: Interactua con los filtros en la parte superior de la página.
+        Filters: Interact with the filters at the top of the page.
 
-        Una vez insertado los filtros, los aplica mediante el botón de "Search".
+        Once the filters have been inserted, apply them by clicking on the "Search" button.
 
-        Nota: Si se quiere aplicar algún filtro, debe de rellenarse antes algún campo mediante las
-        keywords anotadas con "Filtro.<keyword>".
+        Note: If you want to apply a filter, you must first fill in a field with the keywords noted with "Filter.<keyword>.
+        keywords noted with "Filter.<keyword>".
 
-        Pasos:
-        - Espera a que el botón "Search" esté en la página.
-        - Clica en el botón "Search".
+        Steps:
+        - Wait until the "Search" button is on the page.
+        - Click on the "Search" button.
         """
         self.osl.wait_until_element_is_visible(btn_search)
         self.osl.capture_page_screenshot()
         self.osl.click_element(btn_search)
         self.osl.wait_until_element_is_visible(btn_clear)
 
-    @keyword(name='Filtros.Limpiar filtros')
+    @keyword(name='Filters.Clear filter')
     def filters_clear(self):
         """
-        Filtros: Interactua con los filtros en la parte superior de la página.
+        Filters: Interact with the filters at the top of the page.
 
-        Limpia los filtros pulsando el botón de 'clear'. Solo disponible cuando ya se ha filtrado.
+        Clear filters by clicking the 'clear' button. Only available when you have already filtered.
 
-        Pasos:
-        - Espera a que el botón "Clear" esté disponible en la página.
-        - Clica el botón de "Clear".
+        Steps:
+        - Wait until the 'Clear' button is available on the page.
+        - Click the 'Clear' button.
         """
         pass
 
-    @keyword(name='Entrar en el primer resultado')
+    @keyword(name='Go to details of the first result')
     def go_first(self):
         """
-        Entre todos los registros que aparecen en la página, selecciona y mira el detalle del
-        primero que aparece.
+        Among all the records that appear on the page, select and view the detail of the first one that appears.
 
-        Pasos:
-        - Espera por que haya almenos un resultado.
-        - Selecciona el primer registro.
-        - Espera a que aparezca el detalle del registro.
+        Steps:
+        - Wait for at least one result.
+        - Select the first record.
+        - Wait for the record detail to appear.
         """
         loc_first_result = result_with_number.format("1")
         loc_first_result_name = loc_first_result + "//span[contains(@id,'ProductName')]"
@@ -169,18 +167,17 @@ class WebPhones(PageObject):
         self.osl.capture_page_screenshot()
         self.osl.wait_until_element_is_visible(loc_phone_title.format(first_result_name))
 
-    @keyword(name='Detalles.Añadir a favoritos')
+    @keyword(name='Details.Add to favourites')
     def add_to_favs(self):
         """
-        Detalles: Interactua con la pantalla de detalle de un dispositivo.
+        Details: Interact with the detail screen of a device.
 
-        Dentro del detalle del dispositivo, añade a favoritos y se lo guarda en una variable por si se
-        usa en la keyword: WebFavourites.Comprobar favoritos guardados.
+        Within the device detail, it adds to favorites and saves it in a variable in case it is used in the keyword: WebFavourites.Check saved favorites.
 
-        Pasos:
-        - Espera a que exista el botón de favoritos dentro del detalle.
-        - Marca el botón de favoritos si no estaba marcado. Si ya lo estaba, lo deja como está.
-        - (La prueba se guarda en que ese dispositivo se ha añadido a favoritos)
+        Steps:
+        - Wait for the favorites button to exist within the detail.
+        - Check the favorites button if it was not already checked. If it was already marked, leave it as it is.
+        - (The test is saved in that device has been added to favorites).
         """
         self.osl.wait_until_element_is_visible(btn_fav)
         try:

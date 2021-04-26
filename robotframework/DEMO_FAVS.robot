@@ -14,29 +14,24 @@ Library           po/WebFavourites.py
 *** Test Cases ***
 ADD-TO-FAVS
     [Documentation]    Busca los portátiles, móviles y accesorios más baratos y los añade a favoritos.
-
-    WebApplication.Abrir Aplicacion
-    WebLogin.LogIn con email "david.correas@innoqa.es" y contrasena "hello"
-
-    WebHome.Entrar en la pagina de móviles
-    WebPhones.Filtros.Precio más bajo primero
-    WebPhones.Filtros.Buscar
-    WebPhones.Entrar en el primer resultado
-    WebPhones.Detalles.Añadir a favoritos
-
-    WebLaptops.Ir a la página
-    WebLaptops.Filtros.Precio más bajo primero
-    WebLaptops.Filtros.Buscar
-    WebLaptops.Entrar en el primer resultado
-    WebLaptops.Detalles.Añadir a favoritos
-
-    WebAccessories.Ir a la página
-    WebAccessories.Filtros.Precio más bajo primero
-    WebAccessories.Filtros.Buscar
-    WebAccessories.Entrar en el primer resultado
-    WebAccessories.Detalles.Añadir a favoritos
-
-    WebFavourites.Ir a la página
-    WebFavourites.Comprobar favoritos guardados
+    WebApplication.Open Application
+    WebLogin.LogIn with email "david.correas@innoqa.es" and password "hello"
+    WebHome.Go mobile page
+    WebPhones.Filters.Lowest price first
+    WebPhones.Filters.Search
+    WebPhones.Go to details of the first result
+    WebPhones.Details.Add to favourites
+    WebLaptops.Go to page
+    WebLaptops.Filters.Lowest price first
+    WebLaptops.Filters.Search
+    WebLaptops.Go to details of the first result
+    WebLaptops.Details.Add to favourites
+    WebAccessories.Go to page
+    WebAccessories.Filters.Lowest price first
+    WebAccessories.Filters.Search
+    WebAccessories.Go to details of the first result
+    WebAccessories.Details.Add to favourites
+    WebFavourites.Go to page
+    WebFavourites.Check saved favourites
     WebLogin.LogOut
-    WebApplication.Cerrar Aplicacion
+    WebApplication.Close application
